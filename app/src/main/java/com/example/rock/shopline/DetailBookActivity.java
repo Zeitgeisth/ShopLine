@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.androidquery.AQuery;
 import com.example.rock.shopline.DataTypes.BookDescription;
 import com.example.rock.shopline.DataTypes.UserDescription;
+import com.example.rock.shopline.constants.Constants;
 import com.example.rock.shopline.data.GetUser;
 
 public class DetailBookActivity extends AppCompatActivity {
@@ -44,7 +45,7 @@ public class DetailBookActivity extends AppCompatActivity {
 
         bookDetail = getIntent().getParcelableExtra("BookDetail");
 
-        aQuery.id(BookImage).image("http://192.168.1.27:3005/uploads/"+bookDetail.getImage(),true,true);
+        aQuery.id(BookImage).image(Constants.IPconfig + "/uploads/"+bookDetail.getImage(),true,true);
         BookName.setText(bookDetail.getBookName());
         Genre.setText(bookDetail.getGenre());
         Cost.setText("Rs."+bookDetail.getCost());

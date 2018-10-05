@@ -19,6 +19,7 @@ import com.example.rock.shopline.DetailBookActivity;
 import com.example.rock.shopline.HomeActivity;
 import com.example.rock.shopline.R;
 import com.example.rock.shopline.ViewHolders.HomeBookViewHolder;
+import com.example.rock.shopline.constants.Constants;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,7 +57,7 @@ public class HomeBookRecyclerViewAdapter extends RecyclerView.Adapter<HomeBookVi
         final BookDescription book = books.get(position);
         holder.bookName.setText(book.getBookName());
         holder.Cost.setText("Rs."+book.getCost());
-        aQuery.id(holder.bookImage).image("http://192.168.1.27:3005/uploads/"+book.getImage(),true,true);
+        aQuery.id(holder.bookImage).image(Constants.IPconfig + "/uploads/"+book.getImage(),true,true);
 
         holder.bookImage.setOnClickListener(new View.OnClickListener() {
             @Override

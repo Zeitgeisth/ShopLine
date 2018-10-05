@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.rock.shopline.DataTypes.BookDescription;
 import com.example.rock.shopline.data.AddBook;
@@ -20,6 +21,7 @@ import com.example.rock.shopline.data.AddBook;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 public class AddBookActivity extends AppCompatActivity {
@@ -58,8 +60,10 @@ public class AddBookActivity extends AppCompatActivity {
         final BookInterface bookInterface = new BookInterface() {
             @Override
             public void success(boolean success) {
-                  Intent intent = new Intent(AddBookActivity.this, HomeActivity.class);
-                  startActivity(intent);
+                if(success) {
+                    Intent intent = new Intent(AddBookActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                }
             }
         };
 
@@ -98,11 +102,17 @@ public class AddBookActivity extends AppCompatActivity {
 
     }
     private String ImagetoString(Bitmap bitmap) {
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-        byte[] bArray = bos.toByteArray();
-        Log.i("Size",bArray.length+"");
-        return Base64.encodeToString(bArray, Base64.DEFAULT);
+        if(bitmap!=null){
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+            byte[] bArray = bos.toByteArray();
+            Log.i("Size", bArray.length + "");
+            return Base64.encodeToString(bArray, Base64.DEFAULT);
+        }
+        else{
+            Toast.makeText(this,"Image is required", Toast.LENGTH_LONG);
+        }
+        return null;
 
     }
 

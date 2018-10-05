@@ -18,6 +18,7 @@ import com.example.rock.shopline.DataTypes.BookDescription;
 import com.example.rock.shopline.DetailBookActivity;
 import com.example.rock.shopline.R;
 import com.example.rock.shopline.ViewHolders.HomeBookViewHolder;
+import com.example.rock.shopline.constants.Constants;
 
 import java.util.ArrayList;
 public class PersonBookRecyclerViewAdapter extends RecyclerView.Adapter<HomeBookViewHolder> {
@@ -46,7 +47,7 @@ public class PersonBookRecyclerViewAdapter extends RecyclerView.Adapter<HomeBook
         final BookDescription book = books.get(position);
         holder.bookName.setText(book.getBookName());
         holder.Cost.setText("Rs."+book.getCost());
-        aQuery.id(holder.bookImage).image("http://192.168.1.27:3005/uploads/"+book.getImage(),true,true);
+        aQuery.id(holder.bookImage).image(Constants.IPconfig + "/uploads/"+book.getImage(),true,true);
 
     }
 
