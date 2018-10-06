@@ -1,6 +1,7 @@
 package com.example.rock.shopline;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     Boolean loginpage = false;
     String usernamevalue , passwordvalue;
     AuthService authService;
+    SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +32,13 @@ public class LoginActivity extends AppCompatActivity {
         seepassword = findViewById(R.id.Seepassword);
         password = findViewById(R.id.Password);
         username = findViewById(R.id.Username);
+        preferences = getSharedPreferences("previousLogin", MODE_PRIVATE);
 
         authService = new AuthService();
+        if (preferences.getBoolean("loggedIn", false)){
+            username.setText(preferences.getString("email",""));
+            password.setText(preferences.getString("password",""));
+        }
 
         seepassword.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -77,6 +84,9 @@ public class LoginActivity extends AppCompatActivity {
                 passwordvalue = password.getText().toString().trim();
                 if(view.getId() == R.id.Login){
                     if(validateLogin()){
+                        preferences.edit().putBoolean("loggedIn",true).apply();
+                        preferences.edit().putString("email", usernamevalue).apply();
+                        preferences.edit().putString("password", passwordvalue).apply();
                         authService.LoginUser(usernamevalue, passwordvalue, getBaseContext(), loginInterface);
                     }
                 }
