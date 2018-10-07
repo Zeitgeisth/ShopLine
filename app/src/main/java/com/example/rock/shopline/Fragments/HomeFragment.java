@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.example.rock.shopline.AddBookActivity;
@@ -38,7 +40,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
     HomeBookRecyclerViewAdapter adapter;
     ArrayList<BookDescription> booklist;
     GetBook getBook;
-
+    //LinearLayout linearLayout = ((HomeActivity)getActivity()).getLinearLayout();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -51,6 +53,27 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         progressBar.setVisibility(View.VISIBLE);
 
 
+        homeBooks.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+
+               Log.i("Rota",""+dx    +dy);
+               if(dy>80){
+                   ((HomeActivity)getActivity()).getLinearLayout().setVisibility(View.GONE);
+              }
+                else if(dy<-50){
+                    ((HomeActivity)getActivity()).getLinearLayout().setVisibility(View.VISIBLE);
+               }
+            }
+        });
 
 
         HomeActivity.ShowBooks showBooks = new HomeActivity.ShowBooks() {
