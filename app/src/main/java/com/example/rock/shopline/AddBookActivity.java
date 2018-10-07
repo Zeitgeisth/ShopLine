@@ -8,6 +8,7 @@ import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -115,9 +116,11 @@ public class AddBookActivity extends AppCompatActivity {
                 File pictureDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
                 String pictureName = getPictureName();
                 File imageFile = new File(pictureDirectory, pictureName);
-                cameraImageUri = Uri.fromFile(imageFile);
+              //  cameraImageUri = Uri.fromFile(imageFile);
+                cameraImageUri = FileProvider.getUriForFile(getApplicationContext(),  "com.example.rock.shopline.fileprovider", imageFile);
                 cameraIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT,
                         cameraImageUri);
+                cameraIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 if (cameraIntent.resolveActivity(getPackageManager()) != null)
                     startActivityForResult(cameraIntent, REQUEST_CAMERA);
 
@@ -140,10 +143,9 @@ public class AddBookActivity extends AppCompatActivity {
         } else if (requestCode == REQUEST_CAMERA && resultCode == RESULT_OK) {
             try {
                 Image = MediaStore.Images.Media.getBitmap(getContentResolver(), cameraImageUri);
-                int THUMBSIZE = 500;
-                Bitmap thumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(cameraImageUri.getPath()),
-                        THUMBSIZE, THUMBSIZE);
-                BookImage.setImageBitmap(thumbImage);
+                //int THUMBSIZE = 500;
+                //Bitmap thumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(cameraImageUri.getPath()),100,100);
+                BookImage.setImageBitmap(Image);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -153,7 +155,7 @@ public class AddBookActivity extends AppCompatActivity {
 
     private String ImagetoString(Bitmap bitmap) {
         if (bitmap != null) {
-            Bitmap resized = Bitmap.createScaledBitmap(bitmap, 500, 500, true);
+            Bitmap resized = Bitmap.createScaledBitmap(bitmap, 500, 250, true);
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             resized.compress(Bitmap.CompressFormat.JPEG, 100, bos);
             byte[] bArray = bos.toByteArray();

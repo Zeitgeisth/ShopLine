@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ProgressBar;
 
 import com.example.rock.shopline.data.AuthService;
 
@@ -22,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     String usernamevalue , passwordvalue;
     AuthService authService;
     SharedPreferences preferences;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,8 @@ public class LoginActivity extends AppCompatActivity {
         seepassword = findViewById(R.id.Seepassword);
         password = findViewById(R.id.Password);
         username = findViewById(R.id.Username);
+        progressBar = findViewById(R.id.loginProgress);
+        progressBar.setVisibility(View.INVISIBLE);
         preferences = getSharedPreferences("previousLogin", MODE_PRIVATE);
 
         authService = new AuthService();
@@ -71,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void success(Boolean success) {
                     if(success){
+                        progressBar.setVisibility(View.INVISIBLE);
                              Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                              startActivity(intent);
                              finish();
@@ -80,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
                 usernamevalue = username.getText().toString().trim();
                 passwordvalue = password.getText().toString().trim();
                 if(view.getId() == R.id.Login){
