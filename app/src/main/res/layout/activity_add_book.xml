@@ -4,92 +4,139 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.rock.shopline.AddBookActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.example.rock.shopline.AddBookActivity">
+
     <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    <ImageView
-        android:id="@+id/BookImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:adjustViewBounds="true"
-        android:src="@mipmap/add_books_read_literature_512"
-        />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="BookName: "
-        android:fontFamily="@font/lobster"
-        android:textSize="30dp"/>
-
-        <EditText
-            android:id="@+id/BookName"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="_______"
-            android:textSize="30dp"
-            android:fontFamily="@font/lobster"/>
-    </LinearLayout>
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cost: "
-            android:fontFamily="@font/lobster"
-            android:textSize="30dp"/>
-            <EditText
-                android:id="@+id/Cost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/lobster"
-                android:hint="in Rupees"
-                android:textSize="30dp"/>
+            <ImageView
+                android:id="@+id/BookImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/add_books_read_literature_512" />
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Genre: "
-            android:fontFamily="@font/lobster"
-            android:textSize="30dp"/>
-        <EditText
-            android:id="@+id/Genre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/lobster"
-            android:hint="__________"
-            android:textSize="30dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Title: "
+                    android:textColor="@color/textDarkPrimary"
+                    android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/Submit"
-        android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="SUBMIT"
-        android:fontFamily="@font/lobster"
-        android:textSize="20dp"
-        />
-</LinearLayout>
+                <EditText
+                    android:id="@+id/BookName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter book name"
+                    android:maxLines="1"
+                    android:textColor="@color/textDarkSecondary"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Cost: "
+                    android:textColor="@color/textDarkPrimary"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/Cost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Cost in rupees"
+                    android:maxLines="1"
+                    android:textColor="@color/textDarkSecondary"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Genre: "
+                    android:textColor="@color/textDarkPrimary"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/Genre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Genre of book"
+                    android:maxLines="1"
+                    android:textColor="@color/textDarkSecondary"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Descrption: "
+                    android:textColor="@color/textDarkPrimary"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top|left"
+                    android:hint="Add some description (Condition of book, etc.)"
+                    android:inputType="textMultiLine"
+                    android:lines="8"
+                    android:maxLines="10"
+                    android:minLines="4"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/textDarkSecondary"
+                    android:textSize="18sp" />
+
+
+
+        </LinearLayout>
     </ScrollView>
+
+    <com.andexert.library.RippleView
+        rv_centered="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+        <Button
+            android:id="@+id/Submit"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ripple"
+            android:elevation="10dp"
+            android:text="ADD FOR SALE"
+            android:textSize="16sp"
+
+            />
+    </com.andexert.library.RippleView>
 </LinearLayout>
 
