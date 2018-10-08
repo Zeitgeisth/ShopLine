@@ -64,6 +64,7 @@ public class HomeBookRecyclerViewAdapter extends RecyclerView.Adapter<HomeBookVi
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailBookActivity.class);
                 intent.putExtra("BookDetail", book);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
         });
