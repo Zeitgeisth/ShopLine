@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ShopLine.iml" filepath="$PROJECT_DIR$/ShopLine.iml" />
-      <module fileurl="file://C:\Users\rock\AndroidStudioProjects\ShopLine\.idea\ShopLine.iml" filepath="C:\Users\rock\AndroidStudioProjects\ShopLine\.idea\ShopLine.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
