@@ -42,6 +42,16 @@ public class UserDescription {
     public String Phone;
     public String Email;
 
+    public String getLocation() {
+        return Location;
+    }
+
+    public void setLocation(String location) {
+        Location = location;
+    }
+
+    public String Location;
+
     public String getBook() {
         return Book;
     }

@@ -16,9 +16,9 @@ import com.example.rock.shopline.data.AuthService;
 
 public class RegisterActivity extends AppCompatActivity {
     AuthService authService;
-    TextInputEditText Firstname, Middlename, Lastname, Email, Password, Retypepassword, Phone, Day, Month, Year;
+    TextInputEditText Firstname, Lastname, Email, Password, Retypepassword, Phone, Location;
     RadioGroup Gender;
-    String Firstnamevalue, MiddlenameValue, LastnameValue, Emailvalue, Passwordvalue, Retypepasswordvalue, Phonevalue, Dayvalue, MonthValue, YearValue, GenderValue;
+    String Firstnamevalue, LocationValue, LastnameValue, Emailvalue, Passwordvalue, Retypepasswordvalue, Phonevalue;
     Button registerButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +26,14 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         authService = new AuthService();
         Firstname = findViewById(R.id.Firstname);
-        Middlename = findViewById(R.id.Middlename);
+        Location = findViewById(R.id.Location);
         Lastname = findViewById(R.id.Lastname);
         Email = findViewById(R.id.Email);
         Password = findViewById(R.id.Password);
         Retypepassword = findViewById(R.id.Retypepassword);
         Phone = findViewById(R.id.Phone);
-        Day = findViewById(R.id.Day);
-        Month = findViewById(R.id.Month);
-        Year = findViewById(R.id.Year);
-        Gender = findViewById(R.id.Gender);
+
+
         registerButton = findViewById(R.id.registerButton);
 
 
@@ -51,19 +49,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void registeruser(){
             Firstnamevalue = Firstname.getText().toString();
-            MiddlenameValue = Middlename.getText().toString();
             LastnameValue = Lastname.getText().toString();
             Emailvalue = Email.getText().toString();
             Passwordvalue = Password.getText().toString();
             Retypepasswordvalue = Retypepassword.getText().toString();
             Phonevalue = Phone.getText().toString();
-            Dayvalue = Day.getText().toString();
-            MonthValue = Month.getText().toString();
-            YearValue = Year.getText().toString();
-
-            RadioButton radioButton = findViewById(Gender.getCheckedRadioButtonId());
-            GenderValue = radioButton.getText().toString();
-
+            LocationValue = Location.getText().toString();
 
             RegisterInterface registerInterface = new RegisterInterface() {
                 @Override
@@ -79,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         if(validatorRegisterInput()) {
             if (Passwordvalue.equals(Retypepasswordvalue)) {
-                authService.registerUser(Firstnamevalue, MiddlenameValue, LastnameValue, Passwordvalue, Emailvalue, Phonevalue, Dayvalue + '-' + MonthValue + '-' + YearValue, GenderValue, getApplicationContext(), registerInterface);
+                authService.registerUser(Firstnamevalue, LastnameValue, Passwordvalue, Emailvalue, Phonevalue,LocationValue, getApplicationContext(), registerInterface);
             } else {
                 Toast.makeText(getApplicationContext(), "Password doesn't match", Toast.LENGTH_LONG).show();
             }
@@ -120,10 +111,8 @@ public class RegisterActivity extends AppCompatActivity {
             Phone.setError("Phone is required");
             return false;
         }
-        if(Day.getText().toString().trim().equalsIgnoreCase("") || Month.getText().toString().trim().equalsIgnoreCase("") || Year.getText().toString().trim().equalsIgnoreCase("")){
-            Day.setError("Day is required");
-            Month.setError("Month is required");
-            Year.setError("Year is required");
+        if(Location.getText().toString().trim().equalsIgnoreCase("")){
+            Phone.setError("Location is required");
             return false;
         }
 

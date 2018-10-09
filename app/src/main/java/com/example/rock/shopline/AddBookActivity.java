@@ -134,6 +134,7 @@ public class AddBookActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_GALLERY && resultCode == RESULT_OK) {
             selectedImageUri = data.getData();
+            //TODO: Find alternative for getBitmap method. Out of memory exception
             try {
                 Image = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
                 BookImage.setImageBitmap(Image);

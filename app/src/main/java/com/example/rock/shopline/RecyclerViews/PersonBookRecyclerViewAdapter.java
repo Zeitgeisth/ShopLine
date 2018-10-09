@@ -12,8 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.androidquery.AQuery;
+import com.bumptech.glide.Glide;
 import com.example.rock.shopline.DataTypes.BookDescription;
 import com.example.rock.shopline.DetailBookActivity;
 import com.example.rock.shopline.R;
@@ -25,7 +24,6 @@ public class PersonBookRecyclerViewAdapter extends RecyclerView.Adapter<HomeBook
     Bitmap image;
     Context context;
     ArrayList<BookDescription> books;
-    AQuery aQuery;
     public PersonBookRecyclerViewAdapter(Context context, ArrayList books) {
         this.context = context;
         this.books = books;
@@ -43,11 +41,10 @@ public class PersonBookRecyclerViewAdapter extends RecyclerView.Adapter<HomeBook
 
     @Override
     public void onBindViewHolder(@NonNull HomeBookViewHolder holder, int position) {
-        aQuery = new AQuery(context);
         final BookDescription book = books.get(position);
         holder.bookName.setText(book.getBookName());
         holder.Cost.setText("Rs."+book.getCost());
-        aQuery.id(holder.bookImage).image(Constants.IPconfig + "/uploads/"+book.getImage(),true,true);
+        Glide.with(context).load(Constants.IPconfig + "/uploads/"+book.getImage()).into(holder.bookImage);
 
     }
 

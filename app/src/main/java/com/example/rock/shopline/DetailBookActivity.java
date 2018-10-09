@@ -11,15 +11,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.androidquery.AQuery;
+import com.bumptech.glide.Glide;
 import com.example.rock.shopline.DataTypes.BookDescription;
 import com.example.rock.shopline.DataTypes.UserDescription;
 import com.example.rock.shopline.constants.Constants;
 import com.example.rock.shopline.data.GetUser;
 
 public class DetailBookActivity extends AppCompatActivity {
-
-    AQuery aQuery;
     BookDescription bookDetail;
     TextView BookName,Genre,Cost,Name,Email,Phone,ownerName;
     ImageView BookImage;
@@ -32,7 +30,6 @@ public class DetailBookActivity extends AppCompatActivity {
 
         userDescription = new UserDescription();
         getUser = new GetUser(this);
-        aQuery = new AQuery(this);
         BookName = findViewById(R.id.BookName);
         Genre = findViewById(R.id.Genre);
         Cost = findViewById(R.id.Cost);
@@ -45,7 +42,7 @@ public class DetailBookActivity extends AppCompatActivity {
 
         bookDetail = getIntent().getParcelableExtra("BookDetail");
 
-        aQuery.id(BookImage).image(Constants.IPconfig + "/uploads/"+bookDetail.getImage(),true,true);
+        Glide.with(this).load(Constants.IPconfig + "/uploads/"+bookDetail.getImage()).into(BookImage);
         BookName.setText(bookDetail.getBookName());
         Genre.setText(bookDetail.getGenre());
         Cost.setText("Rs."+bookDetail.getCost());
@@ -57,7 +54,7 @@ public class DetailBookActivity extends AppCompatActivity {
                 Name.setText(userDescription.getFirstName()+" "+userDescription.getLastName());
                 Email.setText(userDescription.getEmail());
                 Phone.setText(userDescription.getPhone());
-                ownerName.setText(userDescription.getFirstName()+"?");
+                ownerName.setText("<< View more books from "+userDescription.getFirstName()+" >>");
 
             }
         };
