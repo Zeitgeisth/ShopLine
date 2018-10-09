@@ -156,11 +156,10 @@ public class AddBookActivity extends AppCompatActivity {
 
     private String ImagetoString(Bitmap bitmap) {
         if (bitmap != null) {
-            Bitmap resized = Bitmap.createScaledBitmap(bitmap, 500, 250, true);
+            Bitmap resized = Bitmap.createScaledBitmap(bitmap, 500, bitmap.getHeight(), true);
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             resized.compress(Bitmap.CompressFormat.JPEG, 100, bos);
             byte[] bArray = bos.toByteArray();
-            Log.i("Size", bArray.length + "");
             return Base64.encodeToString(bArray, Base64.DEFAULT);
         } else {
             Toast.makeText(this, "Image is required", Toast.LENGTH_LONG);

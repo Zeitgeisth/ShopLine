@@ -34,10 +34,14 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
             public void success(boolean success) {
                 if(success){
                     UserDescription userDescription = getUser.getUserDescription();
-                    name.setText(userDescription.getFirstName()+" "+userDescription.getLastName());
-                    phone.setText(userDescription.getPhone());
-                    email.setText(userDescription.getEmail());
-                    book.setText(userDescription.getBook());
+                    name.setText("Name: "+userDescription.getFirstName()+" "+userDescription.getLastName());
+                    phone.setText("Phone: "+userDescription.getPhone());
+                    email.setText("Email: "+userDescription.getEmail());
+                    if(userDescription.getBook().matches("1")){
+                        book.setText(userDescription.getBook()+ " " + "book");
+                    }
+                    else book.setText(userDescription.getBook()+ " " + "books");
+
 
                 }
 
