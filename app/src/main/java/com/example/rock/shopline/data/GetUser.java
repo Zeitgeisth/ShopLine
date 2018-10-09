@@ -18,6 +18,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.rock.shopline.DataTypes.BookDescription;
 import com.example.rock.shopline.DataTypes.UserDescription;
 import com.example.rock.shopline.DetailBookActivity;
+import com.example.rock.shopline.Fragments.ProfileFragment;
 import com.example.rock.shopline.HomeActivity;
 import com.example.rock.shopline.constants.Constants;
 
@@ -41,7 +42,7 @@ public class GetUser {
 
     Context context;
 
-    String url = Constants.GETUSER;
+
 
     public UserDescription getUserDescription() {
         return userDescription;
@@ -52,6 +53,8 @@ public class GetUser {
 
 
     public void getUser(final DetailBookActivity.getUser success, final String User) {
+
+        String url = Constants.GETUSER;
 
         JSONObject jsonBody = new JSONObject();
         try {
@@ -157,4 +160,49 @@ public class GetUser {
         Volley.newRequestQueue(context).add(getAllBooks);
 
     }
+
+
+    public void getMeUser(final ProfileFragment.getMeInterface success)
+    {
+        String url = Constants.GETME;
+        final JsonObjectRequest getMe = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+
+                JSONObject User = response;
+                try {
+                    userDescription = new UserDescription();
+                    userDescription.setFirstName(User.getString("firstName"));
+                    userDescription.setLastName(User.getString("lastName"));
+                    userDescription.setEmail(User.getString("email"));
+                    userDescription.setPhone(User.getString("phone"));
+                    userDescription.setBook(User.getString("__v"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                success.success(true);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String>headers = new HashMap<>();
+                headers.put("x-auth-token", Constants.AuthToken);
+                return headers;
+            }
+        };
+
+        Volley.newRequestQueue(context).add(getMe);
+    }
+
+
+
 }

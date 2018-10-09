@@ -42,6 +42,16 @@ public class UserDescription {
     public String Phone;
     public String Email;
 
+    public String getBook() {
+        return Book;
+    }
+
+    public void setBook(String book) {
+        Book = book;
+    }
+
+    public String Book;
+
     public String getId() {
         return Id;
     }
