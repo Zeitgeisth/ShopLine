@@ -12,10 +12,6 @@ import com.example.rock.shopline.DataTypes.UserDescription;
 import com.example.rock.shopline.R;
 import com.example.rock.shopline.data.GetUser;
 
-/**
- * Created by rock on 10/5/2018.
- */
-
 public class ProfileFragment extends android.support.v4.app.Fragment {
     GetUser getUser;
     TextView name, phone, email, book;
@@ -48,10 +44,6 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
             }
         };
         getUser.getMeUser(getMeInterface);
-
-
-
-
         return view;
     }
 
