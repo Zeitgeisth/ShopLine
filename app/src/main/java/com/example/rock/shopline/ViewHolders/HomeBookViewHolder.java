@@ -10,7 +10,7 @@ import com.example.rock.shopline.R;
 
 public class HomeBookViewHolder extends RecyclerView.ViewHolder {
     public ImageView bookImage;
-    public TextView bookName,Cost;
+    public TextView bookName,Cost,Category;
     public LinearLayout clicker;
 
     public HomeBookViewHolder(View itemView) {
@@ -20,5 +20,6 @@ public class HomeBookViewHolder extends RecyclerView.ViewHolder {
         bookName = itemView.findViewById(R.id.BookName);
         Cost = itemView.findViewById(R.id.Cost);
         clicker = itemView.findViewById(R.id.clickLinear);
+        Category = itemView.findViewById(R.id.Category);
     }
 }

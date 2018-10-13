@@ -16,7 +16,7 @@ import android.widget.ProgressBar;
 import com.example.rock.shopline.data.AuthService;
 
 public class LoginActivity extends AppCompatActivity {
-    Button login, register;
+    Button register;
     CheckBox seepassword;
     TextInputEditText username, password;
     Boolean loginpage = false;
@@ -24,11 +24,13 @@ public class LoginActivity extends AppCompatActivity {
     AuthService authService;
     SharedPreferences preferences;
     ProgressBar progressBar;
+    Button login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         login = findViewById(R.id.Login);
         register = findViewById(R.id.Register);
         seepassword = findViewById(R.id.Seepassword);
@@ -76,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void success(Boolean success) {
                     if(success){
                         progressBar.setVisibility(View.INVISIBLE);
+
                              Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                              startActivity(intent);
                              finish();
@@ -85,7 +88,6 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                progressBar.setVisibility(View.VISIBLE);
                 usernamevalue = username.getText().toString().trim();
                 passwordvalue = password.getText().toString().trim();
                 if(view.getId() == R.id.Login){
@@ -93,7 +95,9 @@ public class LoginActivity extends AppCompatActivity {
                         preferences.edit().putBoolean("loggedIn",true).apply();
                         preferences.edit().putString("email", usernamevalue).apply();
                         preferences.edit().putString("password", passwordvalue).apply();
-                        authService.LoginUser(usernamevalue, passwordvalue, getBaseContext(), loginInterface);
+                        progressBar.setVisibility(View.VISIBLE);
+                        login.setVisibility(View.GONE);
+                        authService.LoginUser(usernamevalue, passwordvalue, getBaseContext(), loginInterface, progressBar, login);
                     }
                 }
             }

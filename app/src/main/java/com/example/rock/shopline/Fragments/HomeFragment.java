@@ -22,6 +22,7 @@ import com.example.rock.shopline.DataTypes.BookDescription;
 import com.example.rock.shopline.HomeActivity;
 import com.example.rock.shopline.R;
 import com.example.rock.shopline.RecyclerViews.HomeBookRecyclerViewAdapter;
+import com.example.rock.shopline.constants.Constants;
 import com.example.rock.shopline.data.GetBook;
 
 import java.util.ArrayList;
@@ -40,7 +41,6 @@ public class HomeFragment extends android.support.v4.app.Fragment {
     HomeBookRecyclerViewAdapter adapter;
     ArrayList<BookDescription> booklist;
     GetBook getBook;
-    //LinearLayout linearLayout = ((HomeActivity)getActivity()).getLinearLayout();
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -89,7 +89,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
             }
         };
 
-        getBook.getBook(showBooks);
+        getBook.getBook(showBooks, Constants.GETALLBOOK);
 
 
 

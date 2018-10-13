@@ -44,6 +44,7 @@ public class PersonBookRecyclerViewAdapter extends RecyclerView.Adapter<HomeBook
         final BookDescription book = books.get(position);
         holder.bookName.setText(book.getBookName());
         holder.Cost.setText("Rs."+book.getCost());
+        holder.Category.setText("Genre:" + book.getGenre());
         Glide.with(context).load(Constants.IPconfig + "/uploads/"+book.getImage()).into(holder.bookImage);
 
     }

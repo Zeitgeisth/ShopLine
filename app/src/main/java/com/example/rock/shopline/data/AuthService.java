@@ -2,6 +2,9 @@ package com.example.rock.shopline.data;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -30,7 +33,7 @@ public class AuthService {
     public AuthService() {
     }
 
-    public void registerUser(String firstName, String lastName, String password, String email, String phone, String location, final Context context, final RegisterActivity.RegisterInterface listener){
+    public void registerUser(String firstName, String lastName, String password, String email, String phone, String location, final Context context, final RegisterActivity.RegisterInterface listener, final Button registerButton, final ProgressBar registerProgress){
         String url = Constants.REGISTERURL;
         JSONObject jsonBody = new JSONObject();
         try {
@@ -57,6 +60,8 @@ public class AuthService {
                             try {
                                 String body = new String(error.networkResponse.data,"UTF-8");
                                 Toast.makeText(context, body, Toast.LENGTH_LONG).show();
+                                registerProgress.setVisibility(View.GONE);
+                                registerButton.setVisibility(View.VISIBLE);
                                 listener.success(false);
 
                             } catch (UnsupportedEncodingException e) {
@@ -105,7 +110,7 @@ public class AuthService {
     }
 
 
-    public void LoginUser(String EmailorPhone, String Password, final Context context, final LoginActivity.LoginInterface listener){
+    public void LoginUser(String EmailorPhone, String Password, final Context context, final LoginActivity.LoginInterface listener, final ProgressBar registerProgress, final Button Login){
         String url = Constants.LOGINURL;
         JSONObject jsonBody = new JSONObject();
         try {
@@ -131,7 +136,8 @@ public class AuthService {
                            try {
                                String body = new String(error.networkResponse.data, "UTF-8");
                                Toast.makeText(context, body, Toast.LENGTH_LONG).show();
-                               Log.i("Error2", body);
+                               Login.setVisibility(View.VISIBLE);
+                               registerProgress.setVisibility(View.GONE);
                                listener.success(false);
                            } catch (UnsupportedEncodingException e) {
                                e.printStackTrace();

@@ -163,6 +163,7 @@
                         android:textSize="16sp" />
                 </com.github.florent37.materialtextfield.MaterialTextField>
             </android.support.design.widget.TextInputLayout>
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -187,6 +188,11 @@
             </android.support.design.widget.TextInputLayout>
 
 
+            <ProgressBar
+                android:id="@+id/registerProgress"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"/>
 
             <Button
                 android:id="@+id/registerButton"
