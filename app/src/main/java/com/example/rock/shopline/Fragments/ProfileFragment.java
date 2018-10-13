@@ -67,13 +67,13 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
 
 
 
-                    if(userDescription.getFavBooks() != null){
-                        if(userDescription.getFavBooks().length == 1){
-                            Favourites.setText(userDescription.getFavBooks().length+ " " + "favourite");
-                        }
-                        else if(userDescription.getLastName().length()>1) Favourites.setText(userDescription.getFavBooks().length+ " " + "favourite");
-
-                    }
+//                    if(userDescription.getFavBooks() != null){
+//                        if(userDescription.getFavBooks().length == 1){
+//                            Favourites.setText(userDescription.getFavBooks().length+ " " + "favourite");
+//                        }
+//                        else if(userDescription.getLastName().length()>1) Favourites.setText(userDescription.getFavBooks().length+ " " + "favourite");
+//
+//                    }
 
 
                     final ProfileFragment.getMeInterface myInterface = new getMeInterface() {
