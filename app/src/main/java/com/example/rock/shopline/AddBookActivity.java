@@ -80,6 +80,7 @@ public class AddBookActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(AddBookActivity.this, HomeActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             }
         };
