@@ -37,10 +37,21 @@ public class UserDescription {
         Email = email;
     }
 
-    public String FirstName;
-    public String LastName;
-    public String Phone;
-    public String Email;
+    private String FirstName;
+    private String LastName;
+    private String Phone;
+    private String Email;
+    private String FavBooks[];
+
+    public String[] getBook() {
+        return Book;
+    }
+
+    public void setBook(String[] book) {
+        Book = book;
+    }
+
+    private String Book[];
 
     public String getLocation() {
         return Location;
@@ -50,17 +61,8 @@ public class UserDescription {
         Location = location;
     }
 
-    public String Location;
+    private String Location;
 
-    public String getBook() {
-        return Book;
-    }
-
-    public void setBook(String book) {
-        Book = book;
-    }
-
-    public String Book;
 
     public String getId() {
         return Id;
@@ -71,4 +73,12 @@ public class UserDescription {
     }
 
     public String Id;
+
+    public String[] getFavBooks() {
+        return FavBooks;
+    }
+
+    public void setFavBooks(String[] favBooks) {
+        FavBooks = favBooks;
+    }
 }

@@ -166,18 +166,38 @@ public class GetUser {
     {
         String url = Constants.GETME;
         final JsonObjectRequest getMe = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
+        String BooksID[];
+        String favourite[];
             @Override
             public void onResponse(JSONObject response) {
 
                 JSONObject User = response;
+
                 try {
                     userDescription = new UserDescription();
                     userDescription.setFirstName(User.getString("firstName"));
                     userDescription.setLastName(User.getString("lastName"));
                     userDescription.setEmail(User.getString("email"));
                     userDescription.setPhone(User.getString("phone"));
-                    userDescription.setBook(User.getString("__v"));
+
+                    JSONArray books = User.getJSONArray("books");
+                    JSONArray favBooks = User.getJSONArray("favouriteBooks");
+
+                    favourite = new String[favBooks.length()];
+                    BooksID = new String[books.length()];
+
+
+                    for(int i = 0; i<books.length();i++){
+                        BooksID[i] = books.getString(i);
+                    }
+
+                    for(int i = 0; i<favBooks.length(); i++){
+                        favourite[i] = favBooks.getString(i);
+                    }
+
+                    userDescription.setBook(BooksID);
+                    userDescription.setFavBooks(favourite);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

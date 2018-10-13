@@ -54,9 +54,10 @@ public class HomeBookRecyclerViewAdapter extends RecyclerView.Adapter<HomeBookVi
         final BookDescription book = books.get(position);
         holder.bookName.setText(book.getBookName());
         holder.Cost.setText("Rs."+book.getCost());
+        holder.Category.setText("Genre: " + book.getGenre());
         Glide.with(context).load(Constants.IPconfig + "/uploads/"+book.getImage()).into(holder.bookImage);
 
-        holder.bookImage.setOnClickListener(new View.OnClickListener() {
+        holder.clicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailBookActivity.class);

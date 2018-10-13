@@ -13,6 +13,26 @@ public class BookDescription implements Parcelable {
     private String Genre;
     private String Image;
 
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    private String ID;
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    private String Description;
+
     public static final Creator<BookDescription> CREATOR = new Creator<BookDescription>() {
         @Override
         public BookDescription createFromParcel(Parcel in) {
@@ -84,6 +104,8 @@ public class BookDescription implements Parcelable {
         parcel.writeString(Genre);
         parcel.writeString(Image);
         parcel.writeString(UserID);
+        parcel.writeString(Description);
+        parcel.writeString(ID);
     }
 
     public BookDescription(Parcel in){
@@ -93,6 +115,8 @@ public class BookDescription implements Parcelable {
         Genre = in.readString();
         Image = in.readString();
         UserID = in.readString();
+        Description = in.readString();
+        ID = in.readString();
     }
 
 }

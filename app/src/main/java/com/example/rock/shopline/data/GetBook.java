@@ -2,6 +2,7 @@ package com.example.rock.shopline.data;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.ProgressBar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -10,6 +11,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.rock.shopline.DataTypes.BookDescription;
+import com.example.rock.shopline.Fragments.ProfileFragment;
 import com.example.rock.shopline.HomeActivity;
 import com.example.rock.shopline.constants.Constants;
 
@@ -29,7 +31,6 @@ public class GetBook{
     }
 
     Context context;
-    String url = Constants.GETALLBOOK;
 
     public ArrayList<BookDescription> getBooks() {
         return allBooks;
@@ -39,7 +40,7 @@ public class GetBook{
     final ArrayList<BookDescription>allBooks = new ArrayList<>();
 
 
-    public void getBook(final HomeActivity.ShowBooks success) {
+    public void getBook(final HomeActivity.ShowBooks success, String url) {
 
 
         final JsonArrayRequest getAllBooks = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -47,7 +48,6 @@ public class GetBook{
             public void onResponse(JSONArray response) {
                 BookDescription bookDescription;
                 JSONArray Books = response;
-                Log.i("Response",""+Books);
                 for (int i = 0; i < Books.length(); i++) {
                     try {
                         JSONObject Book = Books.getJSONObject(i);
@@ -57,6 +57,8 @@ public class GetBook{
                         bookDescription.setCost(Book.getString("Cost"));
                         bookDescription.setImage(Book.getString("Images"));
                         bookDescription.setUserID(Book.getString("UserId"));
+                        bookDescription.setDescription(Book.getString("Description"));
+                        bookDescription.setID(Book.getString("_id"));
 
                         allBooks.add(bookDescription);
 
@@ -88,6 +90,108 @@ public class GetBook{
         Volley.newRequestQueue(context).add(getAllBooks);
 
    }
+
+    public void getMyBook(final ProfileFragment.getMeInterface success, String url) {
+
+
+        final JsonArrayRequest getMyAllBooks = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                BookDescription bookDescription;
+                JSONArray Books = response;
+                Log.i("Response",""+Books);
+                for (int i = 0; i < Books.length(); i++) {
+                    try {
+                        JSONObject Book = Books.getJSONObject(i);
+                        bookDescription = new BookDescription();
+                        bookDescription.setBookName(Book.getString("BookName"));
+                        bookDescription.setGenre(Book.getString("Genre"));
+                        bookDescription.setCost(Book.getString("Cost"));
+                        bookDescription.setImage(Book.getString("Images"));
+                        bookDescription.setUserID(Book.getString("UserId"));
+                        bookDescription.setDescription(Book.getString("Description"));
+
+                        allBooks.add(bookDescription);
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                success.success(true);
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("x-auth-token", Constants.AuthToken);
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+
+
+        Volley.newRequestQueue(context).add(getMyAllBooks);
+
+    }
+
+    public void getMyFavBooks(final ProfileFragment.getMeInterface success, String url) {
+
+
+        final JsonArrayRequest getMyAllFavBooks = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                BookDescription bookDescription;
+                JSONArray Books = response;
+                Log.i("Response",""+Books);
+                for (int i = 0; i < Books.length(); i++) {
+                    try {
+                        JSONObject Book = Books.getJSONObject(i);
+                        bookDescription = new BookDescription();
+                        bookDescription.setBookName(Book.getString("BookName"));
+                        bookDescription.setGenre(Book.getString("Genre"));
+                        bookDescription.setCost(Book.getString("Cost"));
+                        bookDescription.setImage(Book.getString("Images"));
+                        bookDescription.setUserID(Book.getString("UserId"));
+                        bookDescription.setDescription(Book.getString("Description"));
+
+                        allBooks.add(bookDescription);
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                success.success(true);
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("x-auth-token", Constants.AuthToken);
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+        };
+
+
+        Volley.newRequestQueue(context).add(getMyAllFavBooks);
+
+    }
 
 }
 

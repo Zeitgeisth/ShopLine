@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ public class RegisterActivity extends AppCompatActivity {
     RadioGroup Gender;
     String Firstnamevalue, LocationValue, LastnameValue, Emailvalue, Passwordvalue, Retypepasswordvalue, Phonevalue;
     Button registerButton;
+    ProgressBar registerProgress;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,8 @@ public class RegisterActivity extends AppCompatActivity {
         Password = findViewById(R.id.Password);
         Retypepassword = findViewById(R.id.Retypepassword);
         Phone = findViewById(R.id.Phone);
+        registerProgress = findViewById(R.id.registerProgress);
+        registerProgress.setVisibility(View.GONE);
 
 
         registerButton = findViewById(R.id.registerButton);
@@ -41,6 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 registeruser();
             }
         });
@@ -60,6 +65,8 @@ public class RegisterActivity extends AppCompatActivity {
                 @Override
                 public void success(Boolean success) {
                          if(success){
+                             registerProgress.setVisibility(View.GONE);
+
                              Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
                              startActivity(intent);
                              finish();
@@ -70,7 +77,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         if(validatorRegisterInput()) {
             if (Passwordvalue.equals(Retypepasswordvalue)) {
-                authService.registerUser(Firstnamevalue, LastnameValue, Passwordvalue, Emailvalue, Phonevalue,LocationValue, getApplicationContext(), registerInterface);
+                authService.registerUser(Firstnamevalue, LastnameValue, Passwordvalue, Emailvalue, Phonevalue,LocationValue, getApplicationContext(), registerInterface, registerButton, registerProgress);
+                registerProgress.setVisibility(View.VISIBLE);
+                registerButton.setVisibility(View.GONE);
             } else {
                 Toast.makeText(getApplicationContext(), "Password doesn't match", Toast.LENGTH_LONG).show();
             }

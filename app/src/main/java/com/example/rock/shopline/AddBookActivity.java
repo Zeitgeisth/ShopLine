@@ -36,7 +36,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class AddBookActivity extends AppCompatActivity {
-    EditText BookName, Cost, Genre;
+    EditText BookName, Cost, Genre, Description;
     ImageView BookImage;
     Button Submit;
     Bitmap Image;
@@ -45,6 +45,7 @@ public class AddBookActivity extends AppCompatActivity {
     Uri selectedImageUri;
     AddBook addBook;
     Uri cameraImageUri;
+    ProgressBar bookProgress;
 
     BookDescription bookDescription;
 
@@ -59,6 +60,9 @@ public class AddBookActivity extends AppCompatActivity {
         Cost = findViewById(R.id.Cost);
         Genre = findViewById(R.id.Genre);
         Submit = findViewById(R.id.Submit);
+        Description = findViewById(R.id.description);
+        bookProgress = findViewById(R.id.bookProgress);
+        bookProgress.setVisibility(View.GONE);
 
         addBook = new AddBook();
 
@@ -72,6 +76,8 @@ public class AddBookActivity extends AppCompatActivity {
             @Override
             public void success(boolean success) {
                 if (success) {
+                    bookProgress.setVisibility(View.GONE);
+
                     Intent intent = new Intent(AddBookActivity.this, HomeActivity.class);
                     startActivity(intent);
                 }
@@ -82,13 +88,20 @@ public class AddBookActivity extends AppCompatActivity {
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 bookDescription.setBookName(BookName.getText().toString());
                 bookDescription.setCost(Cost.getText().toString());
                 bookDescription.setGenre(Genre.getText().toString());
                 bookDescription.setImage(ImagetoString(Image));
-                Log.i("Image", "" + ImagetoString(Image));
+                bookDescription.setDescription(Description.getText().toString());
 
-                addBook.PostAddBook(bookDescription, bookInterface, getBaseContext());
+                if(validateBook()){
+                    bookProgress.setVisibility(View.VISIBLE);
+                    Submit.setVisibility(View.GONE);
+                    addBook.PostAddBook(bookDescription, bookInterface, getBaseContext());
+                }
+
+
             }
         });
 
@@ -156,11 +169,10 @@ public class AddBookActivity extends AppCompatActivity {
 
     private String ImagetoString(Bitmap bitmap) {
         if (bitmap != null) {
-            Bitmap resized = Bitmap.createScaledBitmap(bitmap, 500, 250, true);
+            Bitmap resized = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true);
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             resized.compress(Bitmap.CompressFormat.JPEG, 100, bos);
             byte[] bArray = bos.toByteArray();
-            Log.i("Size", bArray.length + "");
             return Base64.encodeToString(bArray, Base64.DEFAULT);
         } else {
             Toast.makeText(this, "Image is required", Toast.LENGTH_LONG);
@@ -175,6 +187,38 @@ public class AddBookActivity extends AppCompatActivity {
         SimpleDateFormat tst = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH);
         String timestamp = tst.format(new Date());
         return timestamp + ".jpg";
+    }
+
+    public boolean validateBook()
+    {
+        if(Image == null)
+        {
+            Toast.makeText(this, "Image is Required", Toast.LENGTH_SHORT);
+            return false;
+        }
+        if(BookName.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            BookName.setError("BookName is Required");
+            return false;
+        }
+        if(Cost.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            Cost.setError("Cost is Required");
+            return false;
+        }
+        if(Genre.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            Genre.setError("BookName is Required");
+            return false;
+        }
+        if(Description.getText().toString().trim().equalsIgnoreCase(""))
+        {
+            Description.setError("Description is Required");
+            return false;
+        }
+
+
+        return true;
     }
 
     public interface BookInterface {

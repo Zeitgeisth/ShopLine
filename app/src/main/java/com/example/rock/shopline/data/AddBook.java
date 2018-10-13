@@ -41,6 +41,7 @@ public class AddBook {
             jsonBody.put("Cost",bookDescription.getCost());
             jsonBody.put("Genre",bookDescription.getGenre());
             jsonBody.put("Images",bookDescription.getImage());
+            jsonBody.put("Description",bookDescription.getDescription());
 
             final String mReguestBody = jsonBody.toString();
             StringRequest bookRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -112,6 +113,62 @@ public class AddBook {
         }
     }
 
+
+    public void AddFavourites(final Context context, String ID){
+        String url = Constants.ADDMYFAVOURITES;
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("id",ID);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        final String mRequestBody = jsonObject.toString();
+        StringRequest addToFavourites = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                 String msg = response;
+                 Toast.makeText(context,msg,Toast.LENGTH_LONG).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                    if(error.networkResponse.statusCode == 400){
+                        try {
+                            String body = new String(error.networkResponse.data,"UTF-8");
+                            Toast.makeText(context,body,Toast.LENGTH_LONG).show();
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                    }
+            }
+        }){
+            @Override
+            public String getBodyContentType() {
+                return "application/json;charset utf-8";
+            }
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+                    return mRequestBody == null ? null : mRequestBody.getBytes("utf-8");
+                } catch(UnsupportedEncodingException uee){
+                    VolleyLog.wtf("Unsupported Encoding", mRequestBody, "utf-8");
+                    return null;
+                }
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> headers = new HashMap<>();
+                Log.i("Token",""+Constants.AuthToken);
+                headers.put("x-auth-token",Constants.AuthToken);
+                headers.put("Content-Type","application/json");
+                return headers;
+            }
+        };
+        Volley.newRequestQueue(context).add(addToFavourites);
+
+    }
 
 
 }

@@ -14,6 +14,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -55,6 +56,7 @@ public class HomeActivity extends AppCompatActivity {
         Home = findViewById(R.id.HomeButton);
         Profile = findViewById(R.id.Profile);
         Chat = findViewById(R.id.Chat);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -76,9 +78,6 @@ public class HomeActivity extends AppCompatActivity {
         Chat.setOnClickListener(listener);
 
 
-        //linearLayout.setVisibility(View.GONE);
-
-
         Add = findViewById(R.id.Add);
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,11 +87,11 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
-        //getSupportFragmentManager().beginTransaction().replace(R.id.HomePager, homeFragment).commit();
+
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
         viewPager.setCurrentItem(1);
 
-        SmartTabLayout viewPagerTab = (SmartTabLayout) findViewById(R.id.viewpagertab);
+        SmartTabLayout viewPagerTab =  findViewById(R.id.viewpagertab);
         viewPagerTab.setViewPager(viewPager);
 
 

@@ -93,11 +93,18 @@
 
             </LinearLayout>
 
+            <ProgressBar
+                android:id="@+id/bookProgress"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="Descrption: "
+                    android:text="Description: "
                     android:textColor="@color/textDarkPrimary"
                     android:textSize="18sp" />
 
