@@ -98,6 +98,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+
                             <ProgressBar
                                 android:id="@+id/profileProgress"
                                 android:layout_width="30dp"
@@ -111,9 +117,78 @@
 
 
                             </android.support.v7.widget.RecyclerView>
-
+                            </LinearLayout>
                         </com.github.florent37.expansionpanel.ExpansionLayout>
 
+                        <com.github.florent37.expansionpanel.ExpansionHeader
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:background="@color/textDarkSecondary"
+                            android:padding="5dp"
+                            app:expansion_headerIndicator="@id/headerIndicator"
+                            app:expansion_layout="@id/expansionLayout"
+                            app:expansion_toggleOnClick="true">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="5dp"
+                                    android:text="You Have "
+                                    android:textColor="@color/textLightPrimary"
+                                    android:textSize="20sp" />
+
+                                <TextView
+                                    android:id="@+id/Favourite"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="20dp" />
+                            </LinearLayout>
+
+                            <!-- HEADER INDICATOR -->
+                            <ImageView
+                                android:id="@+id/headerIndicator1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical|right"
+                                android:layout_marginLeft="16dp"
+                                android:adjustViewBounds="true"
+                                app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
+                        </com.github.florent37.expansionpanel.ExpansionHeader>
+
+
+
+                        <com.github.florent37.expansionpanel.ExpansionLayout
+                            android:id="@+id/expansionLayout1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+
+                                <ProgressBar
+                                    android:id="@+id/FavProgress"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center" />
+
+                                <android.support.v7.widget.RecyclerView
+                                    android:id="@+id/FavRecycler"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+
+                                </android.support.v7.widget.RecyclerView>
+                            </LinearLayout>
+                        </com.github.florent37.expansionpanel.ExpansionLayout>
 
                     </com.github.florent37.expansionpanel.viewgroup.ExpansionsViewGroupLinearLayout>
 
