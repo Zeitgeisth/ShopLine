@@ -83,6 +83,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),AddBookActivity.class);
+                intent.putExtra("Flag","AddBook");
                 startActivity(intent);
 
             }

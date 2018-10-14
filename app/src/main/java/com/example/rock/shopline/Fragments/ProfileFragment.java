@@ -45,7 +45,6 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         favouriteProgress = view.findViewById(R.id.FavProgress);
         myFavBooksRecycler = view.findViewById(R.id.FavRecycler);
 
-        //profileProgress.setVisibility(View.GONE);
         getBook = new GetBook(getContext());
 
         getUser = new GetUser(getContext());
@@ -58,9 +57,6 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                     name.setText("Name: "+userDescription.getFirstName()+" "+userDescription.getLastName());
                     phone.setText("Phone: "+userDescription.getPhone());
                     email.setText("Email: "+userDescription.getEmail());
-
-
-
                     if(userDescription.getBook() != null){
                         if(userDescription.getBook().length == 1){
                             book.setText(userDescription.getBook().length+ " " + "book");
@@ -71,12 +67,11 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                     }
 
 
-
                     if(userDescription.getFavBooks() != null){
                         if(userDescription.getFavBooks().length == 1){
                             Favourites.setText(userDescription.getFavBooks().length+ " " + "favourite");
                         }
-                        else if(userDescription.getLastName().length()>1) Favourites.setText(userDescription.getFavBooks().length+ " " + "favourite");
+                        else Favourites.setText(userDescription.getFavBooks().length+ " " + "favourite");
 
                     }
 
@@ -96,11 +91,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                     getBook.getMyBook(myInterface, Constants.GETMYBOOKS);
 
 
-
-
-
-
-                    final getMeInterface myFavInterface = new getMeInterface() {
+                    final ProfileFragment.getMeInterface getFavInterface = new getMeInterface() {
                         @Override
                         public void success(boolean success) {
                             favouriteProgress.setVisibility(View.GONE);
@@ -110,10 +101,8 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                             myFavBooksRecycler.setAdapter(myFavBookAdapter);
                         }
                     };
-
                     favouriteProgress.setVisibility(View.VISIBLE);
-                    getBook.getMyFavBooks(myFavInterface, Constants.MYFAVBOOKS);
-
+                    getBook.getMyFavBooks(getFavInterface, Constants.MYFAVBOOKS);
 
                 }
 

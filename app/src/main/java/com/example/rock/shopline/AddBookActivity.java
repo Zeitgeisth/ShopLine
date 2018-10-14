@@ -21,7 +21,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.rock.shopline.DataTypes.BookDescription;
+import com.example.rock.shopline.constants.Constants;
 import com.example.rock.shopline.data.AddBook;
 
 import java.io.ByteArrayOutputStream;
@@ -47,14 +49,15 @@ public class AddBookActivity extends AppCompatActivity {
     Uri cameraImageUri;
     ProgressBar bookProgress;
 
-    BookDescription bookDescription;
+    String Flag;
+    BookDescription bookDescription, newBookDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_book);
-
         bookDescription = new BookDescription();
+
         BookImage = findViewById(R.id.BookImage);
         BookName = findViewById(R.id.BookName);
         Cost = findViewById(R.id.Cost);
@@ -63,6 +66,17 @@ public class AddBookActivity extends AppCompatActivity {
         Description = findViewById(R.id.description);
         bookProgress = findViewById(R.id.bookProgress);
         bookProgress.setVisibility(View.GONE);
+
+        Flag = getIntent().getStringExtra("Flag");
+
+        if(Flag.matches("EditBook")){
+            bookDescription = getIntent().getParcelableExtra("BookDescription");
+            BookName.setText(bookDescription.getBookName());
+            Cost.setText(bookDescription.getCost());
+            Genre.setText(bookDescription.getGenre());
+            Description.setText(bookDescription.getDescription());
+            Glide.with(this).load(Constants.IPconfig + "/uploads/"+bookDescription.getImage()).into(BookImage);
+        }
 
         addBook = new AddBook();
 
@@ -77,30 +91,48 @@ public class AddBookActivity extends AppCompatActivity {
             public void success(boolean success) {
                 if (success) {
                     bookProgress.setVisibility(View.GONE);
-
                     Intent intent = new Intent(AddBookActivity.this, HomeActivity.class);
                     startActivity(intent);
-                    finish();
                 }
             }
         };
 
 
+
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(Flag.matches("AddBook")){
+                    newBookDescription = new BookDescription();
+                    newBookDescription.setBookName(BookName.getText().toString());
+                    newBookDescription.setCost(Cost.getText().toString());
+                    newBookDescription.setGenre(Genre.getText().toString());
+                    newBookDescription.setImage(ImagetoString(Image));
+                    newBookDescription.setDescription(Description.getText().toString());
 
-                bookDescription.setBookName(BookName.getText().toString());
-                bookDescription.setCost(Cost.getText().toString());
-                bookDescription.setGenre(Genre.getText().toString());
-                bookDescription.setImage(ImagetoString(Image));
-                bookDescription.setDescription(Description.getText().toString());
-
-                if(validateBook()){
-                    bookProgress.setVisibility(View.VISIBLE);
-                    Submit.setVisibility(View.GONE);
-                    addBook.PostAddBook(bookDescription, bookInterface, getBaseContext());
+                    if(validateBook()){
+                        bookProgress.setVisibility(View.VISIBLE);
+                        Submit.setVisibility(View.GONE);
+                        addBook.PostAddBook(newBookDescription, bookInterface, getBaseContext());
+                    }
                 }
+                else if(Flag.matches("EditBook")){
+                    newBookDescription = new BookDescription();
+                    newBookDescription.setBookName(BookName.getText().toString());
+                    newBookDescription.setCost(Cost.getText().toString());
+                    newBookDescription.setGenre(Genre.getText().toString());
+                    newBookDescription.setImage(ImagetoString(Image));
+                    newBookDescription.setDescription(Description.getText().toString());
+                    newBookDescription.setID(bookDescription.getID());
+
+                    if(validateBook()){
+                        bookProgress.setVisibility(View.VISIBLE);
+                        Submit.setVisibility(View.GONE);
+                        addBook.PostEditBook(newBookDescription, bookInterface, getBaseContext());
+                    }
+
+                }
+
 
 
             }

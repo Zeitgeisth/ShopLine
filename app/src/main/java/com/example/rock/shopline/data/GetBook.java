@@ -116,6 +116,7 @@ public class GetBook{
                         bookDescription.setImage(Book.getString("Images"));
                         bookDescription.setUserID(Book.getString("UserId"));
                         bookDescription.setDescription(Book.getString("Description"));
+                        bookDescription.setID(Book.getString("_id"));
 
                         allBooks.add(bookDescription);
 

@@ -16,5 +16,6 @@ public class Constants {
     public static final String GETUSERBOOKS = IPconfig + "/API/Shopline/Books/book";
     public static final String GETMYBOOKS = IPconfig + "/API/Shopline/Books/myBook";
     public static final String ADDMYFAVOURITES = IPconfig + "/API/Shopline/add/Favourites";
+    public static final String EDITBOOK = IPconfig + "/API/Shopline/add/EditBook";
     public static final String MYFAVBOOKS = IPconfig + "/API/Shopline/Books/myFav";
 }

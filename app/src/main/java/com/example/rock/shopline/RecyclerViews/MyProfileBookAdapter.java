@@ -1,6 +1,7 @@
 package com.example.rock.shopline.RecyclerViews;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.example.rock.shopline.AddBookActivity;
 import com.example.rock.shopline.DataTypes.BookDescription;
 import com.example.rock.shopline.R;
 import com.example.rock.shopline.ViewHolders.MyProfileBookHolder;
@@ -39,9 +41,18 @@ public class MyProfileBookAdapter extends RecyclerView.Adapter<MyProfileBookHold
 
     @Override
     public void onBindViewHolder(@NonNull MyProfileBookHolder holder, int position) {
-           BookDescription bookDescription = bookDescriptions.get(position);
+           final BookDescription bookDescription = bookDescriptions.get(position);
            Glide.with(context).load(Constants.IPconfig + "/uploads/"+bookDescription.getImage()).into(holder.imageView);
            holder.BookName.setText(bookDescription.getBookName());
+           holder.edit.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   Intent intent = new Intent(context, AddBookActivity.class);
+                   intent.putExtra("Flag","EditBook");
+                   intent.putExtra("BookDescription",bookDescription);
+                   context.startActivity(intent);
+               }
+           });
     }
 
     @Override
