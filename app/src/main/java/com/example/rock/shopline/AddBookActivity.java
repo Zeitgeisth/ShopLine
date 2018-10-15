@@ -51,6 +51,7 @@ public class AddBookActivity extends AppCompatActivity {
 
     String Flag;
     BookDescription bookDescription, newBookDescription;
+    private boolean imageChanged = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +104,7 @@ public class AddBookActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(Flag.matches("AddBook")){
+                    imageChanged = true;
                     newBookDescription = new BookDescription();
                     newBookDescription.setBookName(BookName.getText().toString());
                     newBookDescription.setCost(Cost.getText().toString());
@@ -121,7 +123,14 @@ public class AddBookActivity extends AppCompatActivity {
                     newBookDescription.setBookName(BookName.getText().toString());
                     newBookDescription.setCost(Cost.getText().toString());
                     newBookDescription.setGenre(Genre.getText().toString());
-                    newBookDescription.setImage(ImagetoString(Image));
+                    if (imageChanged){
+                        newBookDescription.setImage(ImagetoString(Image));
+                        Log.i("myLog", "changed");
+                    }
+                    else{
+                        newBookDescription.setImage(bookDescription.getImage());
+                        Log.i("myLog", "same");
+                    }
                     newBookDescription.setDescription(Description.getText().toString());
                     newBookDescription.setID(bookDescription.getID());
 
@@ -179,10 +188,12 @@ public class AddBookActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_GALLERY && resultCode == RESULT_OK) {
+
             selectedImageUri = data.getData();
             //TODO: Find alternative for getBitmap method. Out of memory exception
             try {
                 Image = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImageUri);
+                imageChanged = true;
                 BookImage.setImageBitmap(Image);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -192,6 +203,7 @@ public class AddBookActivity extends AppCompatActivity {
                 Image = MediaStore.Images.Media.getBitmap(getContentResolver(), cameraImageUri);
                 //int THUMBSIZE = 500;
                 //Bitmap thumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(cameraImageUri.getPath()),100,100);
+                imageChanged = true;
                 BookImage.setImageBitmap(Image);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -224,7 +236,7 @@ public class AddBookActivity extends AppCompatActivity {
 
     public boolean validateBook()
     {
-        if(Image == null)
+        if(Image == null && imageChanged)
         {
             Toast.makeText(this, "Image is Required", Toast.LENGTH_SHORT);
             return false;
