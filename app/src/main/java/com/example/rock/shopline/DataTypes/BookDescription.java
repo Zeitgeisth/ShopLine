@@ -13,6 +13,16 @@ public class BookDescription implements Parcelable {
     private String Genre;
     private String Image;
 
+    public String getImageFlag() {
+        return ImageFlag;
+    }
+
+    public void setImageFlag(String imageFlag) {
+        ImageFlag = imageFlag;
+    }
+
+    private String ImageFlag;
+
     public String getID() {
         return ID;
     }
@@ -32,6 +42,8 @@ public class BookDescription implements Parcelable {
     }
 
     private String Description;
+
+
 
     public static final Creator<BookDescription> CREATOR = new Creator<BookDescription>() {
         @Override
@@ -106,6 +118,7 @@ public class BookDescription implements Parcelable {
         parcel.writeString(UserID);
         parcel.writeString(Description);
         parcel.writeString(ID);
+        parcel.writeString(ImageFlag);
     }
 
     public BookDescription(Parcel in){
@@ -117,6 +130,7 @@ public class BookDescription implements Parcelable {
         UserID = in.readString();
         Description = in.readString();
         ID = in.readString();
+        ImageFlag = in.readString();
     }
 
 }

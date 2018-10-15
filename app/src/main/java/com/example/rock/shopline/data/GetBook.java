@@ -65,6 +65,7 @@ public class GetBook{
                         bookDescription.setUserID(Book.getString("UserId"));
                         bookDescription.setDescription(Book.getString("Description"));
                         bookDescription.setID(Book.getString("_id"));
+                        bookDescription.setImageFlag(Book.getString("ImageFlag"));
 
                         allBooks.add(bookDescription);
 
@@ -117,6 +118,7 @@ public class GetBook{
                         bookDescription.setUserID(Book.getString("UserId"));
                         bookDescription.setDescription(Book.getString("Description"));
                         bookDescription.setID(Book.getString("_id"));
+                        bookDescription.setImageFlag(Book.getString("ImageFlag"));
 
                         allBooks.add(bookDescription);
 
@@ -168,6 +170,7 @@ public class GetBook{
                         bookFavDescription.setImage(Book.getString("Images"));
                         bookFavDescription.setUserID(Book.getString("UserId"));
                         bookFavDescription.setDescription(Book.getString("Description"));
+                        bookFavDescription.setImageFlag(Book.getString("ImageFlag"));
 
                         allFavBooks.add(bookFavDescription);
 

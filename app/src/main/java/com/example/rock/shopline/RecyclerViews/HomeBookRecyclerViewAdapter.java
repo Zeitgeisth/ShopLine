@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.annotation.RawRes;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.signature.ApplicationVersionSignature;
 import com.example.rock.shopline.DataTypes.BookDescription;
 import com.example.rock.shopline.DetailBookActivity;
 import com.example.rock.shopline.HomeActivity;
@@ -55,7 +59,8 @@ public class HomeBookRecyclerViewAdapter extends RecyclerView.Adapter<HomeBookVi
         holder.bookName.setText(book.getBookName());
         holder.Cost.setText("Rs."+book.getCost());
         holder.Category.setText("Genre: " + book.getGenre());
-        Glide.with(context).load(Constants.IPconfig + "/uploads/"+book.getImage()).into(holder.bookImage);
+        Glide.with(context).load(Constants.IPconfig + "/uploads/"+book.getImage())
+                .into(holder.bookImage);
 
         holder.clicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +78,6 @@ public class HomeBookRecyclerViewAdapter extends RecyclerView.Adapter<HomeBookVi
     public int getItemCount() {
         return books.size();
     }
-
 
 
 }

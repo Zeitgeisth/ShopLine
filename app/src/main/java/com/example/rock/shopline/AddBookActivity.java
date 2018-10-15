@@ -111,6 +111,7 @@ public class AddBookActivity extends AppCompatActivity {
                     newBookDescription.setGenre(Genre.getText().toString());
                     newBookDescription.setImage(ImagetoString(Image));
                     newBookDescription.setDescription(Description.getText().toString());
+                    newBookDescription.setImageFlag("1");
 
                     if(validateBook()){
                         bookProgress.setVisibility(View.VISIBLE);
@@ -123,6 +124,8 @@ public class AddBookActivity extends AppCompatActivity {
                     newBookDescription.setBookName(BookName.getText().toString());
                     newBookDescription.setCost(Cost.getText().toString());
                     newBookDescription.setGenre(Genre.getText().toString());
+                    Log.i("abcde",bookDescription.getImageFlag()+"");
+                    newBookDescription.setImageFlag(bookDescription.getImageFlag()+"1");
                     if (imageChanged){
                         newBookDescription.setImage(ImagetoString(Image));
                         Log.i("myLog", "changed");

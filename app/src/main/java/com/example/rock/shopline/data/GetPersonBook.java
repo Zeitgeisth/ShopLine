@@ -69,6 +69,7 @@ public class GetPersonBook{
                         bookDescription.setCost(Book.getString("Cost"));
                         bookDescription.setImage(Book.getString("Images"));
                         bookDescription.setUserID(Book.getString("UserId"));
+                        bookDescription.setImageFlag(Book.getString("ImageFlag"));
 
                         allBooks.add(bookDescription);
 

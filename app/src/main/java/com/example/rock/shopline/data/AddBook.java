@@ -41,6 +41,8 @@ public class AddBook {
             jsonBody.put("Genre",bookDescription.getGenre());
             jsonBody.put("Images",bookDescription.getImage());
             jsonBody.put("Description",bookDescription.getDescription());
+            Log.i("abcdef",""+bookDescription.getImageFlag());
+            jsonBody.put("ImageFlag",bookDescription.getImageFlag());
 
             final String mReguestBody = jsonBody.toString();
             StringRequest bookRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -93,17 +95,6 @@ public class AddBook {
                     return headers;
                 }
 
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                     Map<String,String> params = new HashMap<String, String>();
-                    params.put("BookName", bookDescription.getBookName());
-                    params.put("Cost",bookDescription.getCost());
-                    params.put("Genre",bookDescription.getGenre());
-                    params.put("Genre",bookDescription.getGenre());
-
-
-                    return params;
-                }
             };
 
             Volley.newRequestQueue(context).add(bookRequest);
@@ -180,6 +171,8 @@ public class AddBook {
             jsonBody.put("Images",bookDescription.getImage());
             jsonBody.put("Description",bookDescription.getDescription());
             jsonBody.put("id",bookDescription.getID());
+            jsonBody.put("ImageFlag",bookDescription.getImageFlag());
+
 
             final String mReguestBody = jsonBody.toString();
             StringRequest EditBookRequest = new StringRequest(Request.Method.PUT, url, new Response.Listener<String>() {
