@@ -97,53 +97,53 @@
                 android:id="@+id/bookProgress"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_gravity="center"
-                />
+                android:layout_gravity="center" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="Description: "
-                    android:textColor="@color/textDarkPrimary"
-                    android:textSize="18sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="Description: "
+                android:textColor="@color/textDarkPrimary"
+                android:textSize="18sp" />
 
-                <EditText
-                    android:id="@+id/description"
+            <EditText
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|left"
+                android:hint="Add some description (Condition of book, etc.)"
+                android:inputType="textMultiLine"
+                android:lines="8"
+                android:maxLines="10"
+                android:minLines="4"
+                android:scrollbars="vertical"
+                android:textColor="@color/textDarkSecondary"
+                android:textSize="18sp" />
+
+
+            <com.andexert.library.RippleView
+                rv_centered="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp">
+
+                <Button
+                    android:id="@+id/Submit"
+                    style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="top|left"
-                    android:hint="Add some description (Condition of book, etc.)"
-                    android:inputType="textMultiLine"
-                    android:lines="8"
-                    android:maxLines="10"
-                    android:minLines="4"
-                    android:scrollbars="vertical"
-                    android:textColor="@color/textDarkSecondary"
-                    android:textSize="18sp" />
+                    android:background="@drawable/ripple"
+                    android:elevation="10dp"
+                    android:text="ADD FOR SALE"
+                    android:textSize="16sp"
 
-
-
+                    />
+            </com.andexert.library.RippleView>
         </LinearLayout>
+
     </ScrollView>
 
-    <com.andexert.library.RippleView
-        rv_centered="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp">
 
-        <Button
-            android:id="@+id/Submit"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ripple"
-            android:elevation="10dp"
-            android:text="ADD FOR SALE"
-            android:textSize="16sp"
-
-            />
-    </com.andexert.library.RippleView>
 </LinearLayout>
 

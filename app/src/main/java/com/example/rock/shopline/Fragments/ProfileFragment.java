@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.rock.shopline.DataTypes.BookDescription;
 import com.example.rock.shopline.DataTypes.UserDescription;
 import com.example.rock.shopline.R;
+import com.example.rock.shopline.RecyclerViews.MyFavAdapter;
 import com.example.rock.shopline.RecyclerViews.MyProfileBookAdapter;
 import com.example.rock.shopline.constants.Constants;
 import com.example.rock.shopline.data.GetBook;
@@ -28,7 +29,8 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
     ProgressBar profileProgress, favouriteProgress;
     GetBook getBook;
     RecyclerView myBooksRecycler, myFavBooksRecycler;
-    MyProfileBookAdapter myProfileBookAdapter, myFavBookAdapter;
+    MyProfileBookAdapter myProfileBookAdapter;
+    MyFavAdapter myFavBookAdapter;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -39,8 +41,10 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
         book = view.findViewById(R.id.Books);
         profileProgress = view.findViewById(R.id.profileProgress);
         myBooksRecycler = view.findViewById(R.id.myBookRecycler);
+        Favourites = view.findViewById(R.id.Favourite);
+        favouriteProgress = view.findViewById(R.id.FavProgress);
+        myFavBooksRecycler = view.findViewById(R.id.FavRecycler);
 
-        //profileProgress.setVisibility(View.GONE);
         getBook = new GetBook(getContext());
 
         getUser = new GetUser(getContext());
@@ -53,9 +57,6 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                     name.setText("Name: "+userDescription.getFirstName()+" "+userDescription.getLastName());
                     phone.setText("Phone: "+userDescription.getPhone());
                     email.setText("Email: "+userDescription.getEmail());
-
-
-
                     if(userDescription.getBook() != null){
                         if(userDescription.getBook().length == 1){
                             book.setText(userDescription.getBook().length+ " " + "book");
@@ -66,14 +67,13 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                     }
 
 
+                    if(userDescription.getFavBooks() != null){
+                        if(userDescription.getFavBooks().length == 1){
+                            Favourites.setText(userDescription.getFavBooks().length+ " " + "favourite");
+                        }
+                        else Favourites.setText(userDescription.getFavBooks().length+ " " + "favourite");
 
-//                    if(userDescription.getFavBooks() != null){
-//                        if(userDescription.getFavBooks().length == 1){
-//                            Favourites.setText(userDescription.getFavBooks().length+ " " + "favourite");
-//                        }
-//                        else if(userDescription.getLastName().length()>1) Favourites.setText(userDescription.getFavBooks().length+ " " + "favourite");
-//
-//                    }
+                    }
 
 
                     final ProfileFragment.getMeInterface myInterface = new getMeInterface() {
@@ -91,6 +91,18 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                     getBook.getMyBook(myInterface, Constants.GETMYBOOKS);
 
 
+                    final ProfileFragment.getMeInterface getFavInterface = new getMeInterface() {
+                        @Override
+                        public void success(boolean success) {
+                            favouriteProgress.setVisibility(View.GONE);
+                            ArrayList<BookDescription>myBooks = getBook.getAllFavBooks();
+                            myFavBooksRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+                            myFavBookAdapter = new MyFavAdapter(getActivity(), myBooks);
+                            myFavBooksRecycler.setAdapter(myFavBookAdapter);
+                        }
+                    };
+                    favouriteProgress.setVisibility(View.VISIBLE);
+                    getBook.getMyFavBooks(getFavInterface, Constants.MYFAVBOOKS);
 
                 }
 

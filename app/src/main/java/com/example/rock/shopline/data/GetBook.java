@@ -39,6 +39,12 @@ public class GetBook{
 
     final ArrayList<BookDescription>allBooks = new ArrayList<>();
 
+    public ArrayList<BookDescription> getAllFavBooks() {
+        return allFavBooks;
+    }
+
+    final ArrayList<BookDescription>allFavBooks = new ArrayList<>();
+
 
     public void getBook(final HomeActivity.ShowBooks success, String url) {
 
@@ -110,6 +116,7 @@ public class GetBook{
                         bookDescription.setImage(Book.getString("Images"));
                         bookDescription.setUserID(Book.getString("UserId"));
                         bookDescription.setDescription(Book.getString("Description"));
+                        bookDescription.setID(Book.getString("_id"));
 
                         allBooks.add(bookDescription);
 
@@ -148,21 +155,21 @@ public class GetBook{
         final JsonArrayRequest getMyAllFavBooks = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                BookDescription bookDescription;
+                BookDescription bookFavDescription;
                 JSONArray Books = response;
                 Log.i("Response",""+Books);
                 for (int i = 0; i < Books.length(); i++) {
                     try {
                         JSONObject Book = Books.getJSONObject(i);
-                        bookDescription = new BookDescription();
-                        bookDescription.setBookName(Book.getString("BookName"));
-                        bookDescription.setGenre(Book.getString("Genre"));
-                        bookDescription.setCost(Book.getString("Cost"));
-                        bookDescription.setImage(Book.getString("Images"));
-                        bookDescription.setUserID(Book.getString("UserId"));
-                        bookDescription.setDescription(Book.getString("Description"));
+                        bookFavDescription = new BookDescription();
+                        bookFavDescription.setBookName(Book.getString("BookName"));
+                        bookFavDescription.setGenre(Book.getString("Genre"));
+                        bookFavDescription.setCost(Book.getString("Cost"));
+                        bookFavDescription.setImage(Book.getString("Images"));
+                        bookFavDescription.setUserID(Book.getString("UserId"));
+                        bookFavDescription.setDescription(Book.getString("Description"));
 
-                        allBooks.add(bookDescription);
+                        allFavBooks.add(bookFavDescription);
 
 
                     } catch (JSONException e) {

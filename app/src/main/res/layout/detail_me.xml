@@ -51,6 +51,7 @@
 
                         <!--first expansion panel-->
                         <com.github.florent37.expansionpanel.ExpansionHeader
+                            android:id="@+id/MyBookHeader"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
@@ -126,8 +127,8 @@
                             android:layout_margin="5dp"
                             android:background="@color/textDarkSecondary"
                             android:padding="5dp"
-                            app:expansion_headerIndicator="@id/headerIndicator"
-                            app:expansion_layout="@id/expansionLayout"
+                            app:expansion_headerIndicator="@id/headerIndicator1"
+                            app:expansion_layout="@id/expansionLayout1"
                             app:expansion_toggleOnClick="true">
 
                             <LinearLayout
