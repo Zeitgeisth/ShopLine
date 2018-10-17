@@ -15,12 +15,13 @@ import com.example.rock.shopline.R;
 public class MyProfileBookHolder extends RecyclerView.ViewHolder {
     public ImageView imageView;
     public TextView BookName;
-    public ImageButton edit;
+    public ImageButton edit, delete;
     public MyProfileBookHolder(View itemView) {
         super(itemView);
 
         imageView = itemView.findViewById(R.id.BookImage);
         BookName = itemView.findViewById(R.id.BookName);
         edit = itemView.findViewById(R.id.Edit);
+        delete = itemView.findViewById(R.id.Delete);
     }
 }

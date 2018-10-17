@@ -21,7 +21,7 @@ import com.example.rock.shopline.data.GetUser;
 
 public class DetailBookActivity extends AppCompatActivity {
     BookDescription bookDetail;
-    TextView BookName,Genre,Cost,Name,Email,Phone,ownerName,Description;
+    TextView BookName,Genre,Cost,Name,Email,Phone,ownerName,Description,Location;
     ImageView BookImage;
     GetUser getUser;
     UserDescription userDescription;
@@ -46,6 +46,7 @@ public class DetailBookActivity extends AppCompatActivity {
         ownerName = findViewById(R.id.ownerName);
         Description = findViewById(R.id.Description);
         favourites = findViewById(R.id.addtofavourites);
+        Location = findViewById(R.id.Location);
 
 
         bookDetail = getIntent().getParcelableExtra("BookDetail");
@@ -63,7 +64,8 @@ public class DetailBookActivity extends AppCompatActivity {
                 Name.setText(userDescription.getFirstName()+" "+userDescription.getLastName());
                 Email.setText(userDescription.getEmail());
                 Phone.setText(userDescription.getPhone());
-                ownerName.setText("<< View more books from "+userDescription.getFirstName()+" >>");
+                Location.setText(userDescription.getLocation());
+                ownerName.setText("<< View more of "+userDescription.getFirstName()+" >>");
             }
         };
         String User = bookDetail.getUserID();
@@ -74,6 +76,7 @@ public class DetailBookActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(DetailBookActivity.this, PersonBookActivity.class);
                 intent.putExtra("Id",userDescription.getId());
+                intent.putExtra("UserInfo",userDescription);
                 startActivity(intent);
             }
         });

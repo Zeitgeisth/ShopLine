@@ -40,9 +40,10 @@ public class HomeActivity extends AppCompatActivity {
     ImageButton Add;
     ImageView Home, Profile, Chat;
      LinearLayout linearLayout;
-     ViewPager viewPager;
+     public static ViewPager viewPager;
      ProfileFragment profileFragment;
      ChatFragment chatFragment;
+     Boolean EditInfo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +57,9 @@ public class HomeActivity extends AppCompatActivity {
         Home = findViewById(R.id.HomeButton);
         Profile = findViewById(R.id.Profile);
         Chat = findViewById(R.id.Chat);
+
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -90,7 +93,8 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
-        viewPager.setCurrentItem(1);
+
+         viewPager.setCurrentItem(1);
 
         SmartTabLayout viewPagerTab =  findViewById(R.id.viewpagertab);
         viewPagerTab.setViewPager(viewPager);
@@ -132,6 +136,7 @@ public class HomeActivity extends AppCompatActivity {
             return 3;
         }
     }
+
 
 
 

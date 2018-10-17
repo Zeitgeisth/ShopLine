@@ -19,6 +19,7 @@
 
 
             <TextView
+                android:id="@+id/HeadTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -78,6 +79,7 @@
                 android:padding="5dp">
 
                 <com.github.florent37.materialtextfield.MaterialTextField
+                    android:id="@+id/MaterialPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:mtf_image="@drawable/ic_chat_black_24dp"
@@ -101,6 +103,7 @@
                 android:padding="5dp">
 
                 <com.github.florent37.materialtextfield.MaterialTextField
+                    android:id="@+id/MaterialRePassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:mtf_image="@drawable/ic_chat_black_24dp"

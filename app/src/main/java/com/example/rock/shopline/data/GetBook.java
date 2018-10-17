@@ -37,7 +37,7 @@ public class GetBook{
     }
 
 
-    final ArrayList<BookDescription>allBooks = new ArrayList<>();
+    ArrayList<BookDescription>allBooks = new ArrayList<>();
 
     public ArrayList<BookDescription> getAllFavBooks() {
         return allFavBooks;
@@ -53,6 +53,7 @@ public class GetBook{
             @Override
             public void onResponse(JSONArray response) {
                 BookDescription bookDescription;
+                allBooks = new ArrayList<>();
                 JSONArray Books = response;
                 for (int i = 0; i < Books.length(); i++) {
                     try {
@@ -171,6 +172,7 @@ public class GetBook{
                         bookFavDescription.setUserID(Book.getString("UserId"));
                         bookFavDescription.setDescription(Book.getString("Description"));
                         bookFavDescription.setImageFlag(Book.getString("ImageFlag"));
+                        bookFavDescription.setID(Book.getString("_id"));
 
                         allFavBooks.add(bookFavDescription);
 

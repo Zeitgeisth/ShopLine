@@ -78,7 +78,6 @@ public class LoginActivity extends AppCompatActivity {
                 public void success(Boolean success) {
                     if(success){
                         progressBar.setVisibility(View.INVISIBLE);
-
                              Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                              startActivity(intent);
                              finish();

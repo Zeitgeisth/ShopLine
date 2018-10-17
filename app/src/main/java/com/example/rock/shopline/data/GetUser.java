@@ -78,6 +78,7 @@ public class GetUser {
                     userDescription.setEmail(User.getString("email"));
                     userDescription.setPhone(User.getString("phone"));
                     userDescription.setId(User.getString("_id"));
+                    userDescription.setLocation(User.getString("location"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -179,6 +180,8 @@ public class GetUser {
                     userDescription.setLastName(User.getString("lastName"));
                     userDescription.setEmail(User.getString("email"));
                     userDescription.setPhone(User.getString("phone"));
+                    userDescription.setId(User.getString("_id"));
+                    userDescription.setLocation(User.getString("location"));
 
                     JSONArray books = User.getJSONArray("books");
                     JSONArray favBooks = User.getJSONArray("favouriteBooks");

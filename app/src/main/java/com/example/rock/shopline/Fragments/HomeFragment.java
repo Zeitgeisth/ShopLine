@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.rock.shopline.AddBookActivity;
 import com.example.rock.shopline.DataTypes.BookDescription;
@@ -41,6 +43,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
     HomeBookRecyclerViewAdapter adapter;
     ArrayList<BookDescription> booklist;
     GetBook getBook;
+    SwipeRefreshLayout Refresh;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -48,9 +51,10 @@ public class HomeFragment extends android.support.v4.app.Fragment {
 
         homeBooks = view.findViewById(R.id.homeRecycler);
         homeBooks.setHasFixedSize(true);
-        getBook = new GetBook(getActivity().getApplicationContext());
+        getBook = new GetBook(getActivity().getBaseContext());
         progressBar = view.findViewById(R.id.homeProgress);
         progressBar.setVisibility(View.VISIBLE);
+        Refresh = view.findViewById(R.id.Refresh);
 
 
         homeBooks.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -65,7 +69,6 @@ public class HomeFragment extends android.support.v4.app.Fragment {
                 super.onScrolled(recyclerView, dx, dy);
 
 
-               Log.i("Rota",""+dx    +dy);
                if(dy>80){
                    ((HomeActivity)getActivity()).getLinearLayout().setVisibility(View.GONE);
               }
@@ -76,7 +79,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
         });
 
 
-        HomeActivity.ShowBooks showBooks = new HomeActivity.ShowBooks() {
+        final HomeActivity.ShowBooks showBooks = new HomeActivity.ShowBooks() {
             @Override
             public void success(boolean success) {
                 if(success){
@@ -85,9 +88,19 @@ public class HomeFragment extends android.support.v4.app.Fragment {
                     homeBooks.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
                     adapter = new HomeBookRecyclerViewAdapter(getActivity().getApplicationContext(), booklist);
                     homeBooks.setAdapter(adapter);
+                    Refresh.setRefreshing(false);
+
                 }
             }
         };
+        Refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getBook.getBook(showBooks, Constants.GETALLBOOK);
+                Toast.makeText(getActivity().getBaseContext(),"refreshed",Toast.LENGTH_LONG).show();
+            }
+        });
+
 
         getBook.getBook(showBooks, Constants.GETALLBOOK);
 

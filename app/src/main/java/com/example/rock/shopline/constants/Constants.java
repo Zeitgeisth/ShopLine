@@ -8,6 +8,7 @@ public class Constants {
     public static final String IPconfig = "http://192.168.100.45:3005";
     //public static final String IPconfig = "http://192.168.1.22:3005";
     public static final String REGISTERURL = IPconfig + "/API/Shopline/Register/newUser";
+    public static final String EDITURL = IPconfig + "/API/Shopline/Register/EditUser";
     public static final String LOGINURL = IPconfig + "/API/Shopline/Login/User";
     public static final String POSTBOOK = IPconfig + "/API/Shopline/Add/Book";
     public static String AuthToken;
@@ -19,4 +20,6 @@ public class Constants {
     public static final String ADDMYFAVOURITES = IPconfig + "/API/Shopline/add/Favourites";
     public static final String EDITBOOK = IPconfig + "/API/Shopline/add/EditBook";
     public static final String MYFAVBOOKS = IPconfig + "/API/Shopline/Books/myFav";
+    public static final String DELBOOKS = IPconfig + "/API/Shopline/Books/DeleteBook";
+    public static final String REMOVEFAV = IPconfig + "/API/Shopline/Books/removeFav";
 }

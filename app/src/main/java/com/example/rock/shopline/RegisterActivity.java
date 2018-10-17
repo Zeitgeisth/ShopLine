@@ -11,9 +11,12 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.rock.shopline.DataTypes.UserDescription;
 import com.example.rock.shopline.data.AuthService;
+import com.github.florent37.materialtextfield.MaterialTextField;
 
 public class RegisterActivity extends AppCompatActivity {
     AuthService authService;
@@ -22,6 +25,10 @@ public class RegisterActivity extends AppCompatActivity {
     String Firstnamevalue, LocationValue, LastnameValue, Emailvalue, Passwordvalue, Retypepasswordvalue, Phonevalue;
     Button registerButton;
     ProgressBar registerProgress;
+    Boolean EditInfo;
+    TextView HeadTitle;
+    MaterialTextField materialPassword, materialRePassword;
+    UserDescription userDescription;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,18 +42,37 @@ public class RegisterActivity extends AppCompatActivity {
         Retypepassword = findViewById(R.id.Retypepassword);
         Phone = findViewById(R.id.Phone);
         registerProgress = findViewById(R.id.registerProgress);
-        registerProgress.setVisibility(View.GONE);
-
-
         registerButton = findViewById(R.id.registerButton);
+        materialPassword = findViewById(R.id.MaterialPassword);
+        materialRePassword = findViewById(R.id.MaterialRePassword);
 
+        registerProgress.setVisibility(View.GONE);
+        HeadTitle = findViewById(R.id.HeadTitle);
+
+        userDescription = new UserDescription();
+
+        EditInfo = getIntent().getBooleanExtra("EditInfo", false);
+        userDescription = getIntent().getParcelableExtra("MyInfo");
+
+        if(EditInfo){
+            HeadTitle.setVisibility(View.GONE);
+            registerButton.setText("Edit");
+            materialPassword.setVisibility(View.GONE);
+            materialRePassword.setVisibility(View.GONE);
+            Firstname.setText(userDescription.getFirstName());
+            Lastname.setText(userDescription.getLastName());
+            Email.setText(userDescription.getEmail());
+            Phone.setText(userDescription.getPhone());
+            Location.setText(userDescription.getLocation());
+
+        }
 
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                registeruser();
+                if(!EditInfo)  registeruser();
+                else editUser();
             }
         });
 
@@ -67,10 +93,9 @@ public class RegisterActivity extends AppCompatActivity {
                          if(success){
                              registerProgress.setVisibility(View.GONE);
 
-                             Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
-                             startActivity(intent);
-                             finish();
-
+                                 Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+                                 startActivity(intent);
+                                 finish();
                          }
                 }
             };
@@ -89,6 +114,39 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
     }
+
+    public void editUser(){
+        Firstnamevalue = Firstname.getText().toString();
+        LastnameValue = Lastname.getText().toString();
+        Emailvalue = Email.getText().toString();
+        Phonevalue = Phone.getText().toString();
+        LocationValue = Location.getText().toString();
+
+        RegisterInterface registerInterface = new RegisterInterface() {
+            @Override
+            public void success(Boolean success) {
+                if(success){
+                    registerProgress.setVisibility(View.GONE);
+                    Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+
+                }
+            }
+        };
+
+        if(validateInput()) {
+                authService.editUser(Firstnamevalue, LastnameValue, Emailvalue, Phonevalue , LocationValue, userDescription.getId(), getApplicationContext(), registerInterface, registerButton, registerProgress);
+                registerProgress.setVisibility(View.VISIBLE);
+                registerButton.setVisibility(View.GONE);
+        }
+        else{
+            Toast.makeText(getApplicationContext(),"Fields required",Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+
 
     public interface RegisterInterface {
         void success(Boolean success);
@@ -126,6 +184,32 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
 
+        return true;
+    }
+
+
+    public Boolean validateInput(){
+        if(Firstname.getText().toString().trim().equalsIgnoreCase("")){
+            Firstname.setError("Firstname is required");
+            return false;
+        }
+        if(Lastname.getText().toString().trim().equalsIgnoreCase("")){
+            Lastname.setError("Lastname is required");
+            return false;
+        }
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        if(Email.getText().toString().trim().equalsIgnoreCase("") || !(Email.getText().toString().trim().matches(emailPattern))){
+            Email.setError("Email is required or invalid");
+            return false;
+        }
+        if(Phone.getText().toString().trim().equalsIgnoreCase("")){
+            Phone.setError("Phone is required");
+            return false;
+        }
+        if(Location.getText().toString().trim().equalsIgnoreCase("")){
+            Location.setError("Location is required");
+            return false;
+        }
         return true;
     }
 
