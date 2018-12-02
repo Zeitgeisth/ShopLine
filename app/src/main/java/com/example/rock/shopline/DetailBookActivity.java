@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.rock.shopline.DataTypes.BookDescription;
 import com.example.rock.shopline.DataTypes.UserDescription;
+import com.example.rock.shopline.Fragments.ProfileFragment;
 import com.example.rock.shopline.constants.Constants;
 import com.example.rock.shopline.data.AddBook;
 import com.example.rock.shopline.data.GetUser;
@@ -25,9 +26,10 @@ public class DetailBookActivity extends AppCompatActivity {
     ImageView BookImage;
     GetUser getUser;
     UserDescription userDescription;
-    Button favourites;
+    Button favourites, enquire;
     AddBook addBook;
     String ID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +48,7 @@ public class DetailBookActivity extends AppCompatActivity {
         ownerName = findViewById(R.id.ownerName);
         Description = findViewById(R.id.Description);
         favourites = findViewById(R.id.addtofavourites);
+        enquire = findViewById(R.id.enquire);
         Location = findViewById(R.id.Location);
 
 
@@ -85,6 +88,29 @@ public class DetailBookActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                   addBook.AddFavourites(getBaseContext(),bookDetail.getID() );
+            }
+        });
+
+        enquire.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                getUser = new GetUser(getApplicationContext());
+                final ProfileFragment.getMeInterface getMeInterface2 = new ProfileFragment.getMeInterface() {
+                    @Override
+                    public void success(boolean success) {
+                        userDescription = getUser.getUserDescription();
+                        Intent intent = new Intent(DetailBookActivity.this, ChatActivity.class);
+                        intent.putExtra("Email", Email.getText());
+                        intent.putExtra("homeEmail", userDescription.getEmail());
+                        intent.putExtra("awayName", Name.getText() );
+                        intent.putExtra("homeName", userDescription.getFirstName() + " " + userDescription.getLastName());
+
+                        startActivity(intent);
+                    }
+                };
+                getUser.getMeUser(getMeInterface2);
+
             }
         });
 
