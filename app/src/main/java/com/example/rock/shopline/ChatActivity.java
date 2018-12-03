@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.rock.shopline.DataTypes.BookDescription;
 import com.example.rock.shopline.DataTypes.ChatDescription;
+import com.example.rock.shopline.DataTypes.ChatType;
 import com.example.rock.shopline.DataTypes.UserDescription;
 import com.example.rock.shopline.Fragments.ProfileFragment;
 import com.example.rock.shopline.RecyclerViews.ChatAdapter;
@@ -49,7 +50,7 @@ public class ChatActivity extends AppCompatActivity {
 
     {
         try {
-            socket = IO.socket("http://192.168.100.45:3000");
+            socket = IO.socket("http://192.168.1.22:3000");
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -120,12 +121,13 @@ public class ChatActivity extends AppCompatActivity {
         chatDescription = new ChatDescription();
         chatDescription.setName(homeName);
         chatDescription.setMsg(message);
-        addMessage(chatDescription);
+        addMessage(chatDescription, ChatType.type.USER1);
         socket.emit("name",homeName);
         socket.emit("message",message);
     }
 
-    private void addMessage(ChatDescription message){
+    private void addMessage(ChatDescription message, ChatType.type user){
+        message.setUserType(user);
         mMessages.add(message);
         chatRecycler.setHasFixedSize(true);
         adapter = new ChatAdapter(getApplicationContext(), mMessages);
@@ -158,7 +160,7 @@ public class ChatActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
-                    addMessage(chatDescription);
+                    addMessage(chatDescription, ChatType.type.USER2_IMG);
                 }
             });
 

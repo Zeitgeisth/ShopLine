@@ -49,14 +49,17 @@
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/Messages"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:hint="Type your message"/>
 
         <ImageButton
+            android:padding="5dp"
+            android:layout_margin="2dp"
             android:id="@+id/Send"
             android:layout_width="wrap_content"
+            android:scaleType="fitCenter"
             android:layout_height="match_parent"
             android:src="@drawable/ic_trending_flat_black_24dp"/>
             />

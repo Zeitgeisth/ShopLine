@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    android:paddingBottom="5dp"
+    android:paddingEnd="60dp"
+
+    android:paddingLeft="15dp"
+    android:paddingRight="60dp"
+    android:paddingStart="15dp">
+
+
+    <View
+        android:id="@+id/user2_image"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/circle"
+        android:scaleType="centerInside" />
+
+    <TextView
+        android:id="@+id/user2_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/user2_image"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@id/user2_image"
+        android:paddingBottom="4dp"
+        android:text="Rose" />
+
+
+    <TextView
+        android:id="@+id/user2_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/user2_name"
+        android:layout_below="@id/user2_image"
+        android:background="@drawable/user2msg"
+        android:elevation="3dp"
+        android:padding="10dp"
+        android:text="afjlkjfaskjkfsajljdskfjsjlafjdskj"
+        android:textSize="18sp" />
+</RelativeLayout>

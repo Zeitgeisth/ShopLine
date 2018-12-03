@@ -4,18 +4,20 @@ package com.example.rock.shopline.DataTypes;
  * Created by rock on 11/30/2018.
  */
 
+
+
 public class ChatDescription {
-    String name;
+    private String name;
 
-    public String getHomeawayflag() {
-        return homeawayflag;
+    public ChatType.type getUserType() {
+        return userType;
     }
 
-    public void setHomeawayflag(String homeawayflag) {
-        this.homeawayflag = homeawayflag;
+    public void setUserType(ChatType.type userType) {
+        this.userType = userType;
     }
 
-    String homeawayflag;
+    private ChatType.type userType;
 
     public String getName() {
         return name;
@@ -33,6 +35,6 @@ public class ChatDescription {
         this.msg = msg;
     }
 
-    String msg;
+    private String msg;
 
 }
