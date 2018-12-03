@@ -18,18 +18,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity"
-            android:windowSoftInputMode="stateHidden" >
+        <activity
+            android:name=".LoginActivity"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity"
-            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".RegisterActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".AddBookActivity" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.rock.shopline.fileprovider"
@@ -37,13 +40,15 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
+
         <activity
             android:name=".DetailBookActivity"
             android:label="@string/title_activity_detail_book"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".PersonBookActivity"></activity>
+        <activity android:name=".PersonBookActivity" />
+        <activity android:name=".ChatActivity"></activity>
     </application>
 
 </manifest>
