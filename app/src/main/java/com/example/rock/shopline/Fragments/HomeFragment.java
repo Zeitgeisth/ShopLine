@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -85,7 +86,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
                 if(success){
                     progressBar.setVisibility(View.INVISIBLE);
                     booklist = getBook.getBooks();
-                    homeBooks.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+                    homeBooks.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(),3));
                     adapter = new HomeBookRecyclerViewAdapter(getActivity().getApplicationContext(), booklist);
                     homeBooks.setAdapter(adapter);
                     Refresh.setRefreshing(false);
