@@ -73,10 +73,10 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
             public void success(boolean success) {
                 if(success){
                     userDescription = getUser.getUserDescription();
-                    name.setText("Name: "+userDescription.getFirstName()+" "+userDescription.getLastName());
-                    phone.setText("Phone: "+userDescription.getPhone());
-                    email.setText("Email: "+userDescription.getEmail());
-                    Location.setText("Location: "+userDescription.getLocation());
+                    name.setText(userDescription.getFirstName()+" "+userDescription.getLastName());
+                    phone.setText(userDescription.getPhone());
+                    email.setText(userDescription.getEmail());
+                    Location.setText(userDescription.getLocation());
                     if(userDescription.getBook() != null){
                         if(userDescription.getBook().length == 1){
                             book.setText("You Have "+userDescription.getBook().length+ " " + "book");
@@ -91,7 +91,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                         if(userDescription.getFavBooks().length == 1){
                             Favourites.setText("You Have "+userDescription.getFavBooks().length+ " " + "favourite");
                         }
-                        else Favourites.setText("You Have "+userDescription.getFavBooks().length+ " " + "favourite");
+                        else Favourites.setText("You Have "+userDescription.getFavBooks().length+ " " + "favourites");
 
                     }
 
@@ -101,7 +101,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                         public void success(boolean success) {
                             profileProgress.setVisibility(View.GONE);
                             ArrayList<BookDescription>myBooks = getBook.getBooks();
-                            myBooksRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+                            myBooksRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
                             myProfileBookAdapter = new MyProfileBookAdapter(getActivity(), myBooks);
                             myBooksRecycler.setAdapter(myProfileBookAdapter);
                         }
@@ -116,7 +116,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
                         public void success(boolean success) {
                             favouriteProgress.setVisibility(View.GONE);
                             ArrayList<BookDescription>myBooks = getBook.getAllFavBooks();
-                            myFavBooksRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+                            myFavBooksRecycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
                             myFavBookAdapter = new MyFavAdapter(getActivity(), myBooks);
                             myFavBooksRecycler.setAdapter(myFavBookAdapter);
                         }

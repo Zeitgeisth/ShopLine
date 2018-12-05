@@ -36,6 +36,7 @@ public class ChatActivity extends AppCompatActivity {
     RecyclerView chatRecycler;
     ChatDescription chatDescription;
     ImageButton Send;
+    ImageButton backBtn;
     TextInputEditText messages;
     String homeEmail = " ";
     String awayEmail;
@@ -68,11 +69,16 @@ public class ChatActivity extends AppCompatActivity {
 
         Name = findViewById(R.id.AwayEmail);
         chatRecycler = findViewById(R.id.ChatRecycler);
-
+        backBtn = findViewById(R.id.Back);
         Send = findViewById(R.id.Send);
         messages = findViewById(R.id.Messages);
         Name.setText(awayName);
-
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         socket.connect();
 
 //        final ProfileFragment.getMeInterface getMeInterface2 = new ProfileFragment.getMeInterface() {
