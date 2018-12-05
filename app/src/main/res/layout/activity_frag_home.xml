@@ -106,7 +106,6 @@
         app:stl_drawDecorationAfterTab="false"
         />
 
-
     <android.support.v4.view.ViewPager
         android:id="@+id/HomePager"
         android:layout_width="wrap_content"
