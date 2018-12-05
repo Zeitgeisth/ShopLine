@@ -22,4 +22,5 @@ public class Constants {
     public static final String MYFAVBOOKS = IPconfig + "/API/Shopline/Books/myFav";
     public static final String DELBOOKS = IPconfig + "/API/Shopline/Books/DeleteBook";
     public static final String REMOVEFAV = IPconfig + "/API/Shopline/Books/removeFav";
+    public static final String GETMSG = IPconfig + "/API/Shopline/getMsg/message";
 }

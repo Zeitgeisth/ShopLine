@@ -159,7 +159,6 @@
         app:stl_underlineColor="#4D000000"
         app:stl_underlineThickness="1dp" />
 
-
     <android.support.v4.view.ViewPager
         android:id="@+id/HomePager"
         android:background="#e0e0e0"
