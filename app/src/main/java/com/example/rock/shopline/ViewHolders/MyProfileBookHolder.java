@@ -2,6 +2,7 @@ package com.example.rock.shopline.ViewHolders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,7 +16,7 @@ import com.example.rock.shopline.R;
 public class MyProfileBookHolder extends RecyclerView.ViewHolder {
     public ImageView imageView;
     public TextView BookName;
-    public ImageButton edit, delete;
+    public Button edit, delete;
     public MyProfileBookHolder(View itemView) {
         super(itemView);
 
