@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.rock.shopline.DataTypes.ChatDescription;
 import com.example.rock.shopline.DataTypes.ChatType;
+import com.example.rock.shopline.DataTypes.MessageDetails;
 import com.example.rock.shopline.R;
 
 import java.util.ArrayList;
@@ -49,17 +50,19 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ChatDescription description = (ChatDescription) arrayList.get(position);
+        MessageDetails detail = (MessageDetails) arrayList.get(position);
+        Log.i("msg",detail.getUserType()+"");
+        
         switch (holder.getItemViewType()) {
             case 0:
                 user1ViewHolder holder1 = (user1ViewHolder) holder;
-                holder1.textViewHome.setText(description.getMsg());
+                holder1.textViewHome.setText(detail.getMessage());
                 break;
             case 1:
                 user2ImageViewHolder holder2 = (user2ImageViewHolder) holder;
-                holder2.name.setText(description.getName());
+                holder2.name.setText(detail.getName());
                 holder2.image.setBackgroundResource(R.mipmap.user);
-                holder2.text.setText(description.getMsg());
+                holder2.text.setText(detail.getMessage());
                 break;
         }
     }
@@ -71,9 +74,9 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        if (((ChatDescription) arrayList.get(position)).getUserType() == ChatType.type.USER1)
+        if (((MessageDetails) arrayList.get(position)).getUserType() == ChatType.type.USER1)
             return 0;
-        else if (((ChatDescription) arrayList.get(position)).getUserType() == ChatType.type.USER2_IMG)
+        else if (((MessageDetails) arrayList.get(position)).getUserType() == ChatType.type.USER2_IMG)
             return 1;
         else
             return 2;

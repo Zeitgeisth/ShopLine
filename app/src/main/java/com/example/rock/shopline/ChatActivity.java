@@ -10,11 +10,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.rock.shopline.DataTypes.BookDescription;
 import com.example.rock.shopline.DataTypes.ChatDescription;
 import com.example.rock.shopline.DataTypes.ChatType;
+import com.example.rock.shopline.DataTypes.MessageDetails;
 import com.example.rock.shopline.DataTypes.UserDescription;
+import com.example.rock.shopline.Fragments.ChatFragment;
 import com.example.rock.shopline.Fragments.ProfileFragment;
 import com.example.rock.shopline.RecyclerViews.ChatAdapter;
 import com.example.rock.shopline.constants.Constants;
@@ -34,14 +37,14 @@ import io.socket.emitter.Emitter;
 public class ChatActivity extends AppCompatActivity {
     TextView Name;
     RecyclerView chatRecycler;
-    ChatDescription chatDescription;
     ImageButton Send;
     TextInputEditText messages;
     String homeEmail = " ";
     String awayEmail;
     ChatAdapter adapter;
     String socketName, homeName, awayName;
-    private ArrayList<ChatDescription> mMessages = new ArrayList<>();
+    MessageDetails messageDetails;
+    private ArrayList<MessageDetails> mMessages = new ArrayList<>();
 
 
     GetUser getUser1 = new GetUser(this);
@@ -50,7 +53,7 @@ public class ChatActivity extends AppCompatActivity {
 
     {
         try {
-            socket = IO.socket("http://192.168.1.22:3000");
+            socket = IO.socket("http://192.168.1.89:3000");
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -60,14 +63,23 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
-        awayEmail = getIntent().getStringExtra("Email");
-        homeEmail = getIntent().getStringExtra("homeEmail");
+        chatRecycler = findViewById(R.id.ChatRecycler);
+
+        awayEmail = getIntent().getStringExtra("awayEmail");
+        homeEmail = Constants.MyEmail;
         awayName = getIntent().getStringExtra("awayName");
         homeName = getIntent().getStringExtra("homeName");
 
+        String FragmentFlag = getIntent().getStringExtra("FragmentFlag");
+        if(FragmentFlag.equals("Yes")){
+            mMessages = getIntent().getParcelableArrayListExtra("Messages");
+            Log.i("ancdMessage",mMessages.size()+"");
+            previousMessages(mMessages);
+        }
+
 
         Name = findViewById(R.id.AwayEmail);
-        chatRecycler = findViewById(R.id.ChatRecycler);
+
 
         Send = findViewById(R.id.Send);
         messages = findViewById(R.id.Messages);
@@ -75,35 +87,18 @@ public class ChatActivity extends AppCompatActivity {
 
         socket.connect();
 
-//        final ProfileFragment.getMeInterface getMeInterface2 = new ProfileFragment.getMeInterface() {
-//            @Override
-//            public void success(boolean success) {
-//                UserDescription userDescription = getUser1.getUserDescription();
-//                homeEmail = userDescription.getEmail();
-//                socket.connect();
-//
-//                if(homeEmail.compareTo(awayEmail)>0){
-//                    socketName = awayEmail + homeEmail;
-//                }else{
-//                    socketName = homeEmail +  awayEmail;
-//                }
-//
-//                socket.emit("newuser", socketName);
-//
-//            }
-//        };
-//        getUser1.getMeUser(getMeInterface2);
 
 
-        if(homeEmail.compareTo(awayEmail)>0){
-                    socketName = awayEmail + homeEmail;
-                }else{
-                    socketName = homeEmail +  awayEmail;
-                }
-               socket.emit("newuser", socketName);
+            if(homeEmail.compareTo(awayEmail)>0){
+                socketName = awayEmail +" "+ homeEmail;
+            }else{
+                socketName = homeEmail +" "+  awayEmail;
+            }
+            socket.emit("newuser", socketName);
 
+
+        socket.emit("name",homeName);
         socket.on("message", handleMessage);
-
 
         Send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,26 +111,32 @@ public class ChatActivity extends AppCompatActivity {
 
     private void sendMessage(){
         String message = messages.getText().toString();
-        Log.v("amessage",""+message);
         messages.setText("");
-        chatDescription = new ChatDescription();
-        chatDescription.setName(homeName);
-        chatDescription.setMsg(message);
-        addMessage(chatDescription, ChatType.type.USER1);
+        messageDetails = new MessageDetails();
+        messageDetails.setName(homeName);
+        messageDetails.setMessage(message);
+        addMessage(messageDetails, ChatType.type.USER1);
         socket.emit("name",homeName);
         socket.emit("message",message);
     }
 
-    private void addMessage(ChatDescription message, ChatType.type user){
+    private void addMessage(MessageDetails message, ChatType.type user){
         message.setUserType(user);
         mMessages.add(message);
         chatRecycler.setHasFixedSize(true);
         adapter = new ChatAdapter(getApplicationContext(), mMessages);
         chatRecycler.setLayoutManager(new LinearLayoutManager(this));
         chatRecycler.setAdapter(adapter);
-        // adapter.notifyItemInserted(0);
         scrollToBottom();
     }
+    private void previousMessages(ArrayList messages){
+        adapter = new ChatAdapter(getApplicationContext(), messages);
+        chatRecycler.setLayoutManager(new LinearLayoutManager(this));
+        chatRecycler.setHasFixedSize(true);
+        chatRecycler.setAdapter(adapter);
+        scrollToBottom();
+    }
+
 
     private void scrollToBottom(){
         chatRecycler.scrollToPosition(adapter.getItemCount() -1);
@@ -149,18 +150,16 @@ public class ChatActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     JSONObject data = (JSONObject) args[0];
-                    chatDescription = new ChatDescription();
-                    String message = null;
-                    String name = null;
+                     messageDetails = new MessageDetails();
                     try {
-                        chatDescription.setMsg(data.getString("message"));
-                        chatDescription.setName(data.getString("nick"));
+                        messageDetails.setMessage(data.getString("message"));
+                        messageDetails.setName(data.getString("nick"));
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
-                    addMessage(chatDescription, ChatType.type.USER2_IMG);
+                    addMessage(messageDetails, ChatType.type.USER2_IMG);
                 }
             });
 

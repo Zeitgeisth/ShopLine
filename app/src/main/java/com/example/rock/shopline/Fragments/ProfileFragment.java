@@ -72,7 +72,7 @@ public class ProfileFragment extends android.support.v4.app.Fragment {
             @Override
             public void success(boolean success) {
                 if(success){
-                    userDescription = getUser.getUserDescription();
+                    userDescription = getUser.getMeUserDescription();
                     name.setText("Name: "+userDescription.getFirstName()+" "+userDescription.getLastName());
                     phone.setText("Phone: "+userDescription.getPhone());
                     email.setText("Email: "+userDescription.getEmail());

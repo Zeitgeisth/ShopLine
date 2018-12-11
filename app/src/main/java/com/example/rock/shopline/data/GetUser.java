@@ -47,8 +47,12 @@ public class GetUser {
     public UserDescription getUserDescription() {
         return userDescription;
     }
+    public UserDescription getMeUserDescription() {
+        return userDescriptionme;
+    }
 
     UserDescription userDescription;
+    UserDescription userDescriptionme;
 
 
 
@@ -175,13 +179,13 @@ public class GetUser {
                 JSONObject User = response;
 
                 try {
-                    userDescription = new UserDescription();
-                    userDescription.setFirstName(User.getString("firstName"));
-                    userDescription.setLastName(User.getString("lastName"));
-                    userDescription.setEmail(User.getString("email"));
-                    userDescription.setPhone(User.getString("phone"));
-                    userDescription.setId(User.getString("_id"));
-                    userDescription.setLocation(User.getString("location"));
+                    userDescriptionme = new UserDescription();
+                    userDescriptionme.setFirstName(User.getString("firstName"));
+                    userDescriptionme.setLastName(User.getString("lastName"));
+                    userDescriptionme.setEmail(User.getString("email"));
+                    userDescriptionme.setPhone(User.getString("phone"));
+                    userDescriptionme.setId(User.getString("_id"));
+                    userDescriptionme.setLocation(User.getString("location"));
 
                     JSONArray books = User.getJSONArray("books");
                     JSONArray favBooks = User.getJSONArray("favouriteBooks");
@@ -198,8 +202,8 @@ public class GetUser {
                         favourite[i] = favBooks.getString(i);
                     }
 
-                    userDescription.setBook(BooksID);
-                    userDescription.setFavBooks(favourite);
+                    userDescriptionme.setBook(BooksID);
+                    userDescriptionme.setFavBooks(favourite);
 
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -11,14 +11,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.rock.shopline.DataTypes.BookDescription;
+import com.example.rock.shopline.DataTypes.MessageDescription;
+import com.example.rock.shopline.DataTypes.MessageDetails;
 import com.example.rock.shopline.DataTypes.UserDescription;
+import com.example.rock.shopline.Fragments.ChatFragment;
 import com.example.rock.shopline.Fragments.ProfileFragment;
 import com.example.rock.shopline.constants.Constants;
 import com.example.rock.shopline.data.AddBook;
+import com.example.rock.shopline.data.GetMessage;
 import com.example.rock.shopline.data.GetUser;
+
+import java.util.ArrayList;
 
 public class DetailBookActivity extends AppCompatActivity {
     BookDescription bookDetail;
@@ -26,15 +33,19 @@ public class DetailBookActivity extends AppCompatActivity {
     ImageView BookImage;
     GetUser getUser;
     UserDescription userDescription;
+    UserDescription userDescriptions;
     Button favourites, enquire;
     AddBook addBook;
+    GetMessage getMessage;
     String ID;
+    String Room;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_book);
 
+        userDescriptions = new UserDescription();
         userDescription = new UserDescription();
         getUser = new GetUser(this);
         addBook = new AddBook();
@@ -95,18 +106,55 @@ public class DetailBookActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                getMessage = new GetMessage();
                 getUser = new GetUser(getApplicationContext());
                 final ProfileFragment.getMeInterface getMeInterface2 = new ProfileFragment.getMeInterface() {
                     @Override
                     public void success(boolean success) {
-                        userDescription = getUser.getUserDescription();
-                        Intent intent = new Intent(DetailBookActivity.this, ChatActivity.class);
-                        intent.putExtra("Email", Email.getText());
-                        intent.putExtra("homeEmail", userDescription.getEmail());
-                        intent.putExtra("awayName", Name.getText() );
-                        intent.putExtra("homeName", userDescription.getFirstName() + " " + userDescription.getLastName());
+                        userDescriptions = getUser.getMeUserDescription();
 
-                        startActivity(intent);
+                        if(userDescriptions.getEmail().compareTo(userDescription.getEmail())>0){
+                            Room = userDescription.getEmail() +" "+ userDescriptions.getEmail();
+                        }else{
+                            Room = userDescriptions.getEmail() +" "+  userDescription.getEmail();
+                        }
+
+                        Log.i("abcde",userDescriptions.getEmail());
+
+                        ChatFragment.getMessageInterface messageInterface = new ChatFragment.getMessageInterface() {
+                            @Override
+                            public void success(boolean success) {
+                                ArrayList<MessageDescription> messageDescription = getMessage.getmeMessageDescription();
+                                ArrayList<MessageDetails>messageDetails = messageDescription.get(0).getMessageDetail();
+
+                                Intent intent = new Intent(DetailBookActivity.this, ChatActivity.class);
+                                intent.putExtra("Messages", messageDetails);
+                                intent.putExtra("FragmentFlag","Yes");
+                                intent.putExtra("homeName", Constants.MyName);
+                                intent.putExtra("awayName",Name.getText().toString());
+                                intent.putExtra("awayEmail", Email.getText().toString());
+                                startActivity(intent);
+
+
+                            }
+                        };
+
+
+                        getMessage.GetOneMsg(getBaseContext() , Room , messageInterface,userDescriptions.getFirstName() + " " + userDescriptions.getLastName(),Name.getText().toString(),userDescriptions.getEmail(),Email.getText().toString() );
+
+//                        if(Email.getText().equals(userDescriptions.getEmail())){
+//                            Toast.makeText(getBaseContext(),"You cant chat to yourself",Toast.LENGTH_LONG).show();
+//                        }
+//                        else{
+//                            Intent intent = new Intent(DetailBookActivity.this, ChatActivity.class);
+//                            intent.putExtra("Email", Email.getText());
+//                            intent.putExtra("homeEmail", userDescriptions.getEmail());
+//                            intent.putExtra("awayName", Name.getText() );
+//                            intent.putExtra("homeName", userDescriptions.getFirstName() + " " + userDescriptions.getLastName());
+//                            startActivity(intent);
+//                        }
+
+
                     }
                 };
                 getUser.getMeUser(getMeInterface2);

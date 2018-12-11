@@ -5,13 +5,15 @@ package com.example.rock.shopline.constants;
  */
 
 public class Constants {
-    //public static final String IPconfig = "http://192.168.100.45:3005";
-    public static final String IPconfig = "http://192.168.1.22:3005";
+    public static final String IPconfig = "http://192.168.1.89:3005";
+   // public static final String IPconfig = "http://192.168.1.22:3005";
     public static final String REGISTERURL = IPconfig + "/API/Shopline/Register/newUser";
     public static final String EDITURL = IPconfig + "/API/Shopline/Register/EditUser";
     public static final String LOGINURL = IPconfig + "/API/Shopline/Login/User";
     public static final String POSTBOOK = IPconfig + "/API/Shopline/Add/Book";
     public static String AuthToken;
+    public static String MyName;
+    public static String MyEmail;
     public static final String GETALLBOOK =IPconfig + "/API/Shopline/HomePage/All";
     public static final String GETME = IPconfig + "/API/Shopline/Users/me";
     public static final String GETUSER = IPconfig + "/API/Shopline/Users/user";
@@ -23,4 +25,5 @@ public class Constants {
     public static final String DELBOOKS = IPconfig + "/API/Shopline/Books/DeleteBook";
     public static final String REMOVEFAV = IPconfig + "/API/Shopline/Books/removeFav";
     public static final String GETMSG = IPconfig + "/API/Shopline/getMsg/message";
+    public static final String GETONEMESSAGE = IPconfig + "/API/Shopline/getMsg/getOneMessage";
 }
