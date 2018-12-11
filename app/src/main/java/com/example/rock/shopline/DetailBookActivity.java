@@ -135,7 +135,6 @@ public class DetailBookActivity extends AppCompatActivity {
                                 intent.putExtra("awayEmail", Email.getText().toString());
                                 startActivity(intent);
 
-
                             }
                         };
 
