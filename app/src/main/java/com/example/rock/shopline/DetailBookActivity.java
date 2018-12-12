@@ -44,7 +44,6 @@ public class DetailBookActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_book);
-
         userDescriptions = new UserDescription();
         userDescription = new UserDescription();
         getUser = new GetUser(this);

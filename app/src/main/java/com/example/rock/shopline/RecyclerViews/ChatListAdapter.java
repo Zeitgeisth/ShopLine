@@ -100,8 +100,6 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
                             intent.putExtra("awayName",name);
                             intent.putExtra("awayEmail", finalAwayEmail);
                             context.startActivity(intent);
-
-
                         }
                     };
 

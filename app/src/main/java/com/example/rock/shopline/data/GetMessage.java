@@ -246,6 +246,7 @@ public class GetMessage {
                         intent.putExtra("homeName", Constants.MyName);
                         intent.putExtra("awayName",awayName);
                         intent.putExtra("awayEmail",awayEmail);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
 
                     }

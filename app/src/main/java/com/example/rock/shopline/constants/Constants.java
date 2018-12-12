@@ -5,8 +5,8 @@ package com.example.rock.shopline.constants;
  */
 
 public class Constants {
-    public static final String IPconfig = "http://192.168.1.89:3005";
-   // public static final String IPconfig = "http://192.168.1.22:3005";
+    //public static final String IPconfig = "http://192.168.1.89:3005";
+   public static final String IPconfig = "http://192.168.1.22:3005";
     public static final String REGISTERURL = IPconfig + "/API/Shopline/Register/newUser";
     public static final String EDITURL = IPconfig + "/API/Shopline/Register/EditUser";
     public static final String LOGINURL = IPconfig + "/API/Shopline/Login/User";
