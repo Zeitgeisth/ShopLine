@@ -57,7 +57,6 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
             holder.NameText.setText(name);
 
 
-
             MessageDescription messageDescription = messages.get(position);
             Log.i("abcefgh",messageDescription.getSeen()+"");
             if(Constants.MyName.equals(messageDescription.getSender())){

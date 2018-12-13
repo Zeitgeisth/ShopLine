@@ -56,28 +56,21 @@ public class ChatFragment extends Fragment {
                             for(int i = 0;i<messageDescription.size();i++){
                                 messageDescription1 = messageDescription.get(i);
                                 ArrayList<String>name = messageDescription1.getNames();
-                                for(int j=0;j<2;j++){
-                                    if(Constants.MyName.equals(name.get(j))) {
-                                        continue;
-                                    }else {
-                                        Names.add(name.get(j));
+                                    for(int j=0;j<2;j++) {
+                                        if (Constants.MyName.equals(name.get(j))) {
+                                            continue;
+                                        } else {
+                                            Names.add(name.get(j));
+                                        }
+
                                     }
 
-                                }
                             }
-
-
-
-
 
                             ChatList.setHasFixedSize(true);
                             chatListAdapter = new ChatListAdapter(Names, getActivity(), messageDescription);
                             ChatList.setLayoutManager(new LinearLayoutManager(getActivity()));
                             ChatList.setAdapter(chatListAdapter);
-
-
-
-
 
 
                     }

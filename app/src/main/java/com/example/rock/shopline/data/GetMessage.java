@@ -47,7 +47,7 @@ public class GetMessage {
         return messageDescriptionMe;
     }
 
-    public void GetMsg(Context context, String ID, final ChatFragment.getMessageInterface success)
+    public void GetMsg(final Context context, String ID, final ChatFragment.getMessageInterface success)
     {
         String url = Constants.GETMSG;
         JSONObject jsonBody = new JSONObject();
@@ -128,6 +128,11 @@ public class GetMessage {
             @Override
             public void onErrorResponse(VolleyError error) {
 
+                if(error.networkResponse.statusCode == 400) {
+                    Toast.makeText(context, "No Chat", Toast.LENGTH_SHORT);
+                    Log.i("abcdeeeeee","NNo Chat");
+                    success.success(false);
+                }
             }
         }){
             @Override

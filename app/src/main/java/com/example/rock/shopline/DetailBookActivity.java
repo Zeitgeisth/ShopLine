@@ -119,27 +119,27 @@ public class DetailBookActivity extends AppCompatActivity {
                             Room = userDescriptions.getEmail() +" "+  userDescription.getEmail();
                         }
 
-                        Log.i("abcde",userDescriptions.getEmail());
-
                         ChatFragment.getMessageInterface messageInterface = new ChatFragment.getMessageInterface() {
                             @Override
                             public void success(boolean success) {
-                                ArrayList<MessageDescription> messageDescription = getMessage.getmeMessageDescription();
-                                ArrayList<MessageDetails>messageDetails = messageDescription.get(0).getMessageDetail();
 
-                                Intent intent = new Intent(DetailBookActivity.this, ChatActivity.class);
-                                intent.putExtra("Messages", messageDetails);
-                                intent.putExtra("FragmentFlag","Yes");
-                                intent.putExtra("homeName", Constants.MyName);
-                                intent.putExtra("awayName",Name.getText().toString());
-                                intent.putExtra("awayEmail", Email.getText().toString());
-                                startActivity(intent);
+                                    ArrayList<MessageDescription> messageDescription = getMessage.getmeMessageDescription();
+                                    ArrayList<MessageDetails> messageDetails = messageDescription.get(0).getMessageDetail();
 
+                                    Intent intent = new Intent(DetailBookActivity.this, ChatActivity.class);
+                                    intent.putExtra("Messages", messageDetails);
+                                    intent.putExtra("FragmentFlag", "Yes");
+                                    intent.putExtra("homeName", Constants.MyName);
+                                    intent.putExtra("awayName", Name.getText().toString());
+                                    intent.putExtra("awayEmail", Email.getText().toString());
+                                    startActivity(intent);
                             }
                         };
 
-
-                        getMessage.GetOneMsg(getBaseContext() , Room , messageInterface,userDescriptions.getFirstName() + " " + userDescriptions.getLastName(),Name.getText().toString(),userDescriptions.getEmail(),Email.getText().toString() );
+                        if(userDescription.getEmail().equals(userDescriptions.getEmail())){
+                            Toast.makeText(getBaseContext(),"You cant chat to yourself",Toast.LENGTH_LONG).show();
+                        }
+                        else getMessage.GetOneMsg(getBaseContext() , Room , messageInterface,userDescriptions.getFirstName() + " " + userDescriptions.getLastName(),Name.getText().toString(),userDescriptions.getEmail(),Email.getText().toString() );
 
 //                        if(Email.getText().equals(userDescriptions.getEmail())){
 //                            Toast.makeText(getBaseContext(),"You cant chat to yourself",Toast.LENGTH_LONG).show();

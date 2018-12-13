@@ -7,18 +7,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.rock.shopline.DataTypes.BookDescription;
-import com.example.rock.shopline.DataTypes.ChatDescription;
 import com.example.rock.shopline.DataTypes.ChatType;
 import com.example.rock.shopline.DataTypes.MessageDetails;
-import com.example.rock.shopline.DataTypes.UserDescription;
-import com.example.rock.shopline.Fragments.ChatFragment;
-import com.example.rock.shopline.Fragments.ProfileFragment;
 import com.example.rock.shopline.RecyclerViews.ChatAdapter;
 import com.example.rock.shopline.constants.Constants;
 import com.example.rock.shopline.data.GetUser;
