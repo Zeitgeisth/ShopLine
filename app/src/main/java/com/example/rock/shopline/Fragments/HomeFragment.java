@@ -38,7 +38,7 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
  */
 
 public class HomeFragment extends android.support.v4.app.Fragment {
-
+    public static final int GRID_COUNT = 2;
     ProgressBar progressBar;
     RecyclerView homeBooks;
     HomeBookRecyclerViewAdapter adapter;
@@ -86,7 +86,7 @@ public class HomeFragment extends android.support.v4.app.Fragment {
                 if(success){
                     progressBar.setVisibility(View.INVISIBLE);
                     booklist = getBook.getBooks();
-                    homeBooks.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(),3));
+                    homeBooks.setLayoutManager(new GridLayoutManager(getActivity().getApplicationContext(),GRID_COUNT));
                     adapter = new HomeBookRecyclerViewAdapter(getActivity().getApplicationContext(), booklist);
                     homeBooks.setAdapter(adapter);
                     Refresh.setRefreshing(false);
