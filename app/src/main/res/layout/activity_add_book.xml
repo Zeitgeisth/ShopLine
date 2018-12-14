@@ -7,6 +7,39 @@
     android:orientation="vertical"
     tools:context="com.example.rock.shopline.AddBookActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/backdropColor">
+
+        <com.andexert.library.RippleView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:rv_centered="true">
+
+
+            <ImageButton
+                android:id="@+id/Back"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@color/transparent"
+                android:padding="10dp"
+                android:src="@drawable/ic_arrow_back_black_24dp" />
+        </com.andexert.library.RippleView>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Fill details of your book"
+            android:textColor="@color/textLightPrimary"
+            android:textSize="18sp" />
+
+
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -15,83 +48,121 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="5dp">
 
-            <ImageView
-                android:id="@+id/BookImage"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:src="@mipmap/add_books_read_literature_512" />
+            <com.andexert.library.RippleView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:rv_centered="true">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="Title: "
-                    android:textColor="@color/textDarkPrimary"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:id="@+id/BookName"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter book name"
-                    android:maxLines="1"
-                    android:textColor="@color/textDarkSecondary"
-                    android:textSize="18sp" />
-            </LinearLayout>
+                    android:layout_marginBottom="10dp">
 
-            <LinearLayout
+
+                    <ImageView
+                        android:id="@+id/BookImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/empty_box" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/BookImage"
+                        android:layout_centerInParent="true"
+                        android:layout_marginBottom="20dp"
+                        android:gravity="center"
+                        android:text="Tap to upload an image"
+                        android:textSize="20sp" />
+
+                </RelativeLayout>
+            </com.andexert.library.RippleView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableEnd="@drawable/ic_star_black_24dp"
+                android:drawableRight="@drawable/ic_star_black_24dp"
+                android:gravity="bottom"
+                android:padding="3dp"
+                android:text="Title"
+                android:textAllCaps="true"
+                android:textColor="@color/textDarkPrimary"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/BookName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/input_form_box"
+                android:fontFamily="sans-serif-light"
+                android:hint="Enter book name"
+                android:maxLines="1"
+                android:textColor="@color/textDarkSecondary" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="Cost: "
-                    android:textColor="@color/textDarkPrimary"
-                    android:textSize="18sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableEnd="@drawable/ic_star_black_24dp"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/ic_star_black_24dp"
+                android:gravity="bottom"
+                android:padding="3dp"
+                android:text="Genre"
+                android:textAllCaps="true"
+                android:textColor="@color/textDarkPrimary"
+                android:textSize="12sp" />
 
-                <EditText
-                    android:id="@+id/Cost"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Cost in rupees"
-                    android:maxLines="1"
-                    android:textColor="@color/textDarkSecondary"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
+            <EditText
+                android:id="@+id/Genre"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/input_form_box"
+                android:fontFamily="sans-serif-light"
+                android:hint="Eg...."
+                android:maxLines="1"
+                android:textColor="@color/textDarkSecondary" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="Genre: "
-                    android:textColor="@color/textDarkPrimary"
-                    android:textSize="18sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableEnd="@drawable/ic_star_black_24dp"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/ic_star_black_24dp"
+                android:gravity="bottom"
+                android:padding="3dp"
+                android:text="Cost"
+                android:textAllCaps="true"
+                android:textColor="@color/textDarkPrimary"
+                android:textSize="12sp" />
 
-                <EditText
-                    android:id="@+id/Genre"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Genre of book"
-                    android:maxLines="1"
-                    android:textColor="@color/textDarkSecondary"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
+            <EditText
+                android:id="@+id/Cost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/input_form_box"
+                android:fontFamily="sans-serif-light"
+                android:hint="Eg. 500"
+                android:maxLines="1"
+                android:textColor="@color/textDarkSecondary" />
 
             <ProgressBar
                 android:id="@+id/bookProgress"
@@ -102,15 +173,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="Description: "
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:padding="3dp"
+                android:text="Description"
+                android:textAllCaps="true"
                 android:textColor="@color/textDarkPrimary"
-                android:textSize="18sp" />
+                android:textSize="12sp" />
 
             <EditText
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/input_form_box"
+                android:fontFamily="sans-serif-light"
                 android:gravity="top|left"
                 android:hint="Add some description (Condition of book, etc.)"
                 android:inputType="textMultiLine"
@@ -118,8 +195,7 @@
                 android:maxLines="10"
                 android:minLines="4"
                 android:scrollbars="vertical"
-                android:textColor="@color/textDarkSecondary"
-                android:textSize="18sp" />
+                android:textColor="@color/textDarkSecondary" />
 
 
             <com.andexert.library.RippleView
@@ -135,7 +211,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/ripple"
                     android:elevation="10dp"
-                    android:text="ADD FOR SALE"
+                    android:text="add book"
                     android:textSize="16sp"
 
                     />

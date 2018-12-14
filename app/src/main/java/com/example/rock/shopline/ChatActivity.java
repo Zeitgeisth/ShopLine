@@ -51,6 +51,7 @@ public class ChatActivity extends AppCompatActivity {
             throw new RuntimeException(e);
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,9 +65,9 @@ public class ChatActivity extends AppCompatActivity {
         homeName = getIntent().getStringExtra("homeName");
 
         String FragmentFlag = getIntent().getStringExtra("FragmentFlag");
-        if(FragmentFlag.equals("Yes")){
+        if (FragmentFlag.equals("Yes")) {
             mMessages = getIntent().getParcelableArrayListExtra("Messages");
-            Log.i("ancdMessage",mMessages.size()+"");
+            Log.i("ancdMessage", mMessages.size() + "");
             previousMessages(mMessages);
         }
 
@@ -81,39 +82,41 @@ public class ChatActivity extends AppCompatActivity {
         socket.connect();
 
 
+        if (homeEmail.compareTo(awayEmail) > 0) {
+            socketName = awayEmail + " " + homeEmail;
+        } else {
+            socketName = homeEmail + " " + awayEmail;
+        }
+        socket.emit("newuser", socketName);
 
-            if(homeEmail.compareTo(awayEmail)>0){
-                socketName = awayEmail +" "+ homeEmail;
-            }else{
-                socketName = homeEmail +" "+  awayEmail;
-            }
-            socket.emit("newuser", socketName);
 
-
-        socket.emit("name",homeName);
+        socket.emit("name", homeName);
         socket.on("message", handleMessage);
 
         Send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 sendMessage();
             }
         });
 
     }
 
-    private void sendMessage(){
+    private void sendMessage() {
         String message = messages.getText().toString();
-        messages.setText("");
-        messageDetails = new MessageDetails();
-        messageDetails.setName(homeName);
-        messageDetails.setMessage(message);
-        addMessage(messageDetails, ChatType.type.USER1);
-        socket.emit("name",homeName);
-        socket.emit("message",message);
+        if (message.length() > 0) {
+            messages.setText("");
+            messageDetails = new MessageDetails();
+            messageDetails.setName(homeName);
+            messageDetails.setMessage(message);
+            addMessage(messageDetails, ChatType.type.USER1);
+            socket.emit("name", homeName);
+            socket.emit("message", message);
+        }
     }
 
-    private void addMessage(MessageDetails message, ChatType.type user){
+    private void addMessage(MessageDetails message, ChatType.type user) {
         message.setUserType(user);
         mMessages.add(message);
         chatRecycler.setHasFixedSize(true);
@@ -122,7 +125,8 @@ public class ChatActivity extends AppCompatActivity {
         chatRecycler.setAdapter(adapter);
         scrollToBottom();
     }
-    private void previousMessages(ArrayList messages){
+
+    private void previousMessages(ArrayList messages) {
         adapter = new ChatAdapter(getApplicationContext(), messages);
         chatRecycler.setLayoutManager(new LinearLayoutManager(this));
         chatRecycler.setHasFixedSize(true);
@@ -131,19 +135,19 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
-    private void scrollToBottom(){
-        chatRecycler.scrollToPosition(adapter.getItemCount() -1);
+    private void scrollToBottom() {
+        chatRecycler.scrollToPosition(adapter.getItemCount() - 1);
     }
 
 
     private Emitter.Listener handleMessage = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
-            runOnUiThread(new Runnable(){
+            runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     JSONObject data = (JSONObject) args[0];
-                     messageDetails = new MessageDetails();
+                    messageDetails = new MessageDetails();
                     try {
                         messageDetails.setMessage(data.getString("message"));
                         messageDetails.setName(data.getString("nick"));

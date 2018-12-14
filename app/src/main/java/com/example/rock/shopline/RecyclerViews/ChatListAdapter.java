@@ -8,12 +8,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.rock.shopline.ChatActivity;
 import com.example.rock.shopline.DataTypes.MessageDescription;
 import com.example.rock.shopline.DataTypes.MessageDetails;
-import com.example.rock.shopline.DetailBookActivity;
 import com.example.rock.shopline.Fragments.ChatFragment;
 import com.example.rock.shopline.R;
 import com.example.rock.shopline.constants.Constants;
@@ -54,16 +54,16 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
 
 
 
-            holder.NameText.setText(name);
+            holder.nameText.setText(name);
 
 
             MessageDescription messageDescription = messages.get(position);
             Log.i("abcefgh",messageDescription.getSeen()+"");
             if(Constants.MyName.equals(messageDescription.getSender())){
-                holder.NameText.setTextColor(-16777216);
+                holder.nameText.setTextColor(-16777216);
             }else{
                 if(messageDescription.getSeen()==false){
-                    holder.NameText.setTextColor(-16776961);
+                    holder.nameText.setTextColor(-16776961);
                 }
             }
 
@@ -80,7 +80,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
 
 
         final String finalAwayEmail = awayEmail;
-        holder.NameText.setOnClickListener(new View.OnClickListener() {
+        holder.chatDetail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     String room;
@@ -91,7 +91,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
                             ArrayList<MessageDescription> messageDescription = getMessage.getmeMessageDescription();
                             ArrayList<MessageDetails>messageDetails = messageDescription.get(0).getMessageDetail();
 
-                            holder.NameText.setTextColor(-16777216);
+                            holder.nameText.setTextColor(-16777216);
                             Intent intent = new Intent(context, ChatActivity.class);
                             intent.putExtra("Messages", messageDetails);
                             intent.putExtra("FragmentFlag","Yes");
@@ -121,10 +121,12 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatLi
     }
 
       class ChatListViewHolder extends RecyclerView.ViewHolder {
-        TextView NameText;
+        LinearLayout chatDetail;
+        TextView nameText;
         public ChatListViewHolder(View itemView) {
             super(itemView);
-            NameText = itemView.findViewById(R.id.namechats);
+            nameText = itemView.findViewById(R.id.namechats);
+            chatDetail = itemView.findViewById(R.id.chatDetail);
         }
     }
 }
