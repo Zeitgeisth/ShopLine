@@ -5,56 +5,63 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <com.andexert.library.RippleView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp">
+        app:rv_centered="true">
 
-        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/profile_image"
-            android:layout_width="96dp"
-            android:layout_height="70dp"
-            android:src="@mipmap/profile"
-            app:civ_border_color="#FF000000"
-            app:civ_border_width="2dp" />
-
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/chatDetail"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
 
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="96dp"
+                android:layout_height="70dp"
+                android:src="@mipmap/profile"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp" />
 
-            <TextView
-                android:id="@+id/namechats"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="Name last"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/message_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:padding="5dp"
-                android:text="23.04"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/message_preview"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-               android:layout_below="@id/namechats"
-                android:text="jfksjsjfljfs"
-                android:gravity="center_vertical"
-                android:textSize="14sp" />
+                android:layout_height="match_parent">
 
-        </RelativeLayout>
-    </LinearLayout>
+
+                <TextView
+                    android:id="@+id/namechats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Name last"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/message_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:padding="5dp"
+                    android:text="23.04"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/message_preview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/namechats"
+                    android:gravity="center_vertical"
+                    android:padding="5dp"
+                    android:text="jfksjsjfljfs"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </com.andexert.library.RippleView>
 
     <View
         android:layout_width="match_parent"

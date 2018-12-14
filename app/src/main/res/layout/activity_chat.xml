@@ -11,7 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/backdropColor">
-
+        <com.andexert.library.RippleView
+            app:rv_centered="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
         <ImageButton
             android:id="@+id/Back"
             android:layout_width="50dp"
@@ -19,7 +22,7 @@
             android:background="@color/transparent"
             android:padding="10dp"
             android:src="@drawable/ic_arrow_back_black_24dp" />
-
+        </com.andexert.library.RippleView>
         <TextView
             android:id="@+id/AwayEmail"
             android:layout_width="0dp"
@@ -30,13 +33,16 @@
             android:text="abcd"
             android:textColor="@color/textLightPrimary"
             android:textSize="18sp" />
-
+        <com.andexert.library.RippleView
+            app:rv_centered="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:padding="10dp"
             android:src="@drawable/ic_call_black_24dp" />
-
+        </com.andexert.library.RippleView>
     </LinearLayout>
 
 
@@ -69,7 +75,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:hint="Type your message" />
-
+        <com.andexert.library.RippleView
+            app:rv_centered="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
         <ImageButton
             android:id="@+id/Send"
             android:background="@color/transparent"
@@ -79,6 +88,7 @@
             android:padding="3dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_send_black_24dp" />
+        </com.andexert.library.RippleView>
     </LinearLayout>
 
 </LinearLayout>
